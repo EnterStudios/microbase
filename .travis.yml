@@ -31,9 +31,10 @@ script:
 - npm run test-cov-lcov
 after_success:
 - cat ./lcov.info | ./node_modules/.bin/coveralls
+- cd ..
 deploy:
   provider: script
-  script: npmpublish.sh
+  script: ./npmpublish.sh
   on:
     branch: master
 notifications:
