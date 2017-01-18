@@ -4,8 +4,14 @@
  const base = require('microbase')({ extra: { raven } });
  */
 module.exports = (base) => {
+  const url = base.config.get('transports:http:monitors:sentry:url');
+  if (!url) {
+    return () => {
+      base.logger.error('[http] sentry properties not configured');
+    };
+  }
   base.extra.raven.disableConsoleAlerts();
-  base.extra.raven.config(base.config.get('transports:http:monitors:sentry:url'), {
+  base.extra.raven.config(url, {
     autoBreadcrumbs: true,
     captureUnhandledRejections: true
   }).install();

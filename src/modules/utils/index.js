@@ -8,6 +8,10 @@ module.exports = function (base) {
 
   const service = {
 
+    template(str, o) {
+      return str.replace(/\${([^{}]*)}/g, (a, b) => o[b]);
+    },
+
     extractErrors(error) {
       const errors = [];
       Object.keys(error.errors).forEach(key => {
@@ -24,15 +28,17 @@ module.exports = function (base) {
     },
 
     loadModulesFromFolder(folder) {
+      const defaultOperationsKey = base.config.get('services:defaultOperationsKey');
       const modules = [];
-      glob.sync(`${rootPath}/${folder}/*.js`).forEach(file => {
-        const asKey = folder.replace(/[/\\]/g, ':') + ':' + path.basename(file, '.js');
+      const finalFolder = this.template(folder, base.config.get());
+      glob.sync(`${finalFolder}/*.js`).forEach((file) => {
+        const asKey = `${defaultOperationsKey}:${path.basename(file, '.js')}`;
         const asValue = base.config.get(asKey);
         let module;
-        if (!asValue) {
-          module = require(file)(base, file);
-        } else {
+        if (asValue) {
           module = (this.loadModule(asKey) || {}).module;
+        } else {
+          module = require(file)(base, file);
         }
         modules.push({
           module,
@@ -44,6 +50,10 @@ module.exports = function (base) {
 
     loadModulesFromKey(key) {
       const baseConfig = base.config.get(key);
+      if (!baseConfig) {
+        base.logger.error(`[utils] trying to loading modules from and empty '${key}' key`);
+        return [];
+      }
       const modules = [];
       Object.keys(baseConfig).forEach(moduleKey => {
         modules.push(this.loadModule(`${key}:${moduleKey}`));
@@ -53,11 +63,12 @@ module.exports = function (base) {
 
     loadModule(key) {
       if (base.logger.isDebugEnabled()) base.logger.debug(`[modules] loading module from '${key}'`);
-      const name = base.config.get(key);
+      let name = base.config.get(key);
       if (!name) {
         base.logger.warn(`[modules] module '${key}' not found`);
         return null;
       }
+      name = this.template(name, base.config.get());
       let modulePath;
       if (name.startsWith('.')) {
         modulePath = path.normalize(`${rootPath}/${name}`);
@@ -65,8 +76,13 @@ module.exports = function (base) {
         modulePath = name;
       }
       try {
+        const module = require(modulePath);
+        let moduleFn;
+        if (typeof module === 'function') {
+          moduleFn = module(base, key.split(':'));
+        }
         return {
-          module: require(modulePath)(base, key.split(':')),
+          module: moduleFn || module,
           keys: key.split(':'),
           path: modulePath
         };

@@ -140,7 +140,7 @@ module.exports = function (base) {
   });
 
   // HTTP server listen
-  app.listen(base.config.get('transports:http:port'), base.config.get('transports:http:host'), function () {
+  const server = app.listen(base.config.get('transports:http:port'), base.config.get('transports:http:host'), function () {
     base.logger.info(`[http] running at ${this.address().address}:${this.address().port}${base.config.get('transports:http:path')}`);
   });
 
@@ -220,6 +220,7 @@ module.exports = function (base) {
 
   return {
     app,
+    server,
     use,
     call
   };

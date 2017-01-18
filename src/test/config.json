@@ -4,12 +4,12 @@
       "validator": "./modules/services/inMiddlewares/validator",
       "eventEmitter": "./modules/services/inMiddlewares/eventEmitter",
       "cache": "./modules/services/inMiddlewares/cache"
+    },
+    "operations": {
+      "module1": "${rootPath}/test/modulesOverwrite/moduleOverwritten"
     }
   },
   "test": {
-    "loadModules": {
-      "module1": "./test/modulesOverwrite/moduleOverwritten"
-    },
     "loadModule": {
       "moduleDot": "./test/loadModules/module1",
       "moduleNoDot": "shortid",

@@ -8,6 +8,14 @@ version numbers will follow a [Semver][]-ish `0.y.z` format, where `y`
 is incremented when new features or breaking changes are introduced,
 and `z` is incremented for lesser changes or bug fixes.
 
+## [0.11.0][] (2017-01-18)
+
+* Refactored the config module to allow the services to be packaged and used. 
+* Added variables substitution in the config values.
+* Added graceful http shutdown process, with timeout.
+* Added a log on circuitbreaker failure.
+* Fix postman collection.
+
 ## [0.10.0][] (2017-01-10)
 
 * Added microbase and package info to the config object. 

@@ -80,14 +80,14 @@ describe('Utils', () => {
     done();
   });
   it('should load modules from a folder', (done) => {
-    const modules = base.utils.loadModulesFromFolder('test/loadModules');
+    const modules = base.utils.loadModulesFromFolder('${rootPath}/test/loadModules');
     expect(modules).to.be.a.array().and.to.have.length(2);
     expect(modules[0]).to.be.an.object();
     expect(modules[0].module).to.be.a.function();
     done();
   });
   it('should load modules from folder, key overwriting', (done) => {
-    const modules = base.utils.loadModulesFromFolder('test/loadModules');
+    const modules = base.utils.loadModulesFromFolder('${rootPath}/test/loadModules');
     expect(modules).to.be.a.array().and.to.have.length(2);
     expect(modules[0]).to.be.an.object();
     expect(modules[0].module).to.be.a.function();
@@ -95,7 +95,7 @@ describe('Utils', () => {
     done();
   });
   it('should load modules from key', (done) => {
-    const modules = base.utils.loadModulesFromKey('test:loadModules');
+    const modules = base.utils.loadModulesFromKey('services:operations');
     expect(modules).to.be.a.array().and.to.have.length(1);
     expect(modules[0]).to.be.an.object();
     expect(modules[0].module).to.be.a.function();

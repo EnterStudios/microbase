@@ -100,10 +100,10 @@ module.exports = function (base) {
   };
 
   // For given folder name each file exports an operation. Name resolved to filename if no one is provided
-  const defaultOperationsFolder = base.config.get('services:defaultFolder')
+  const defaultOperationsFolder = base.config.get('services:defaultOperationsFolder');
   service.addOperationsFromFolder = (folder = defaultOperationsFolder, transports) => {
     const modules = base.utils.loadModulesFromFolder(folder);
-    modules.forEach(operation => {
+    modules.forEach((operation) => {
       if (operation.module) {
         operation.module.name = operation.module.name || path.basename(operation.file, '.js');
         service.addOperation(operation.module, transports);
@@ -152,6 +152,10 @@ module.exports = function (base) {
         };
       }
       circuit = new Brakes(promiseCall(transport), options);
+
+      circuit.on('failure', () => {
+        base.logger.error(`[service] Circuit breaker failure for ${context.config.name}`);
+      });
 
       circuit.on('circuitOpen', () => {
         base.logger.error(`[service] Circuit breaker opened for ${context.config.name}`);

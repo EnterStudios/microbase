@@ -27,8 +27,7 @@
         "sentry": {
           "enabledBeforeRoutes": false,
           "enabledBeforeErrorHandlers": false,
-          "module": "./node_modules/microbase/modules/transports/http/monitors/sentry.js",
-          "url": "https://***@sentry.io/127235"
+          "module": "./node_modules/microbase/modules/transports/http/monitors/sentry.js"
         }
       }
     },
@@ -37,7 +36,8 @@
     }
   },
   "services": {
-    "defaultFolder": "operations",
+    "defaultOperationsFolder": "${servicePath}/operations",
+    "defaultOperationsKey": "services:operations",
     "defaultTransports": [
       "http",
       "amqp"
