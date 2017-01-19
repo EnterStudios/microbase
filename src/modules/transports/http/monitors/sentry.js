@@ -18,8 +18,16 @@ module.exports = (base) => {
   }).install();
   return (app, place) => {
     if (place === 'beforeRoutes') {
+      if (!base.extra.raven) {
+        base.logger.error('[sentry] raven package not installed');
+        return;
+      }
       app.use(base.extra.raven.requestHandler());
     } else if (place === 'beforeErrorHandlers') {
+      if (!base.extra.raven) {
+        base.logger.error('[sentry] raven package not installed');
+        return;
+      }
       app.use((err, req, res, next) => {
         if (err) {
           base.extra.raven.mergeContext({
