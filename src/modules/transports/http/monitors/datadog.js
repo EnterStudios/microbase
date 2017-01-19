@@ -9,7 +9,7 @@ const url = require('url');
 module.exports = (base) => {
   return (app, place) => {
     if (place === 'beforeRoutes') {
-      if (!base.extra.dd || base.extra.dogstatsd) {
+      if (!base.extra.dd || !base.extra.dogstatsd) {
         base.logger.error('[datadog] datadog package not installed');
         return;
       }
