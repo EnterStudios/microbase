@@ -13,12 +13,21 @@ module.exports = (base) => {
   base.extra.raven.disableConsoleAlerts();
   base.extra.raven.config(url, {
     autoBreadcrumbs: true,
-    captureUnhandledRejections: true
+    captureUnhandledRejections: true,
+    release: `${base.config.get('info:package:name')}@${base.config.get('info:package:commit')}`
   }).install();
   return (app, place) => {
     if (place === 'beforeRoutes') {
+      if (!base.extra.raven) {
+        base.logger.error('[sentry] raven package not installed');
+        return;
+      }
       app.use(base.extra.raven.requestHandler());
     } else if (place === 'beforeErrorHandlers') {
+      if (!base.extra.raven) {
+        base.logger.error('[sentry] raven package not installed');
+        return;
+      }
       app.use((err, req, res, next) => {
         if (err) {
           base.extra.raven.mergeContext({
@@ -26,8 +35,7 @@ module.exports = (base) => {
               // 'x-request-id': req.headers['x-request-id'],
               service: `${base.config.get('services:name')}:${base.config.get('services:version')}`,
               mbversion: base.config.get('info:microbase:version'),
-              package: `${base.config.get('info:package:name')}@${base.config.get('info:package:version')}`,
-              commit: base.config.get('info:package:commit') || 'N/A'
+              package: `${base.config.get('info:package:name')}@${base.config.get('info:package:version')}`
             }
           });
         }
