@@ -22,7 +22,15 @@ try {
 }
 
 // Instantiate microbase
-const base = require('microbase')();
+const base = require('microbase')({
+  configFiles: [
+    `${__dirname}/config/${process.env.NODE_ENV || 'development'}.json`,
+    `${__dirname}/config/defaults.json`
+  ],
+  configObject: {
+    servicePath: __dirname
+  }
+});
 const helper = require('./insertDataHelpers')(base);
 if (!helper[`insert${entityName}`]) {
   console.error(`Unrecognized entity '${entityName}'`);
@@ -55,7 +63,8 @@ const insertEntity = function (rl, jsonString) {
     })
     .catch(error => {
       //console.warn('\nProcessed', processed++, inserted, '\n', error.message, '\n', jsonString, '\n');
-      console.warn('Processed', ++processed, inserted, error.message, jsonString.substring(0, 100));
+      console.warn('Processed', ++processed, inserted, jsonString.substring(0, 100));
+      console.warn(error);
       counter--;
       if (error.message && error.message === 'duplicate key') {
         return waitToResume(rl);

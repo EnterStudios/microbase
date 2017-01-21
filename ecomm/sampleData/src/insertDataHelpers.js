@@ -6,17 +6,19 @@ function helpers(base) {
 
   const productMapBySku = new Map();
   const categoryMapByTitle = new Map();
-  const timeout = 10000;
+  const timeout = base.config.get('timeout');
+  const defaultRetryInterval = base.config.get('retryInterval');
+  const defaultRetryTimes = base.config.get('retryTimes');
 
-  const setProperty = function (obj, property, value, parent) {
-    if (typeof parent == 'array') {
+  const setProperty = (obj, property, value, parent) => {
+    if (typeof parent === 'object') {
       parent[property] = value;
     } else {
       obj[property] = value;
     }
   };
 
-  function productIdBySku(obj, property, sku, retryTimes, retryTimeout, parent) {
+  function productIdBySku(obj, property, sku, retryTimes, retryInterval, parent) {
     const existingProduct = productMapBySku.get(sku);
     if (existingProduct) {
       setProperty(obj, property, existingProduct, parent);
@@ -24,16 +26,16 @@ function helpers(base) {
     }
     return base.services.call({
       name: 'catalog:product.list',
-        headers: headers,
-        timeout: timeout
-    }, { sku: sku })
+      headers,
+      timeout
+    }, { sku })
       .then((result) => {
-        if (result.ok == false || result.data.length == 0) {
-          if (retryTimes == 0) throw new Error(`Product not found '${sku}'`);
+        if (result.ok === false || (result.data && result.data.length == 0)) {
+          if (retryTimes === 0) throw new Error(`Product not found '${sku}'`);
           return new Promise((resolve) => {
             setTimeout(() => {
-              resolve(productIdBySku(obj, property, sku, retryTimes - 1, retryTimeout, parent));
-            }, retryTimeout);
+              resolve(productIdBySku(obj, property, sku, retryTimes - 1, retryInterval, parent));
+            }, retryInterval);
           })
         }
         productMapBySku.set(sku, result.data[0].id);
@@ -41,7 +43,7 @@ function helpers(base) {
       });
   }
 
-  const categoryIdByTitle = function (obj, property, title, retryTimes, retryTimeout, parent) {
+  const categoryIdByTitle = (obj, property, title, retryTimes, retryInterval, parent) => {
     const existingCategory = categoryMapByTitle.get(title);
     if (existingCategory) {
       setProperty(obj, property, existingCategory, parent);
@@ -49,16 +51,16 @@ function helpers(base) {
     }
     return base.services.call({
       name: 'catalog:category.list',
-        headers: headers,
-        timeout: timeout
-    }, { title: title })
-      .then(result => {
-        if (result.ok == false || result.data.length == 0) {
-          if (retryTimes == 0) throw new Error(`Category not found '${title}'`);
+      headers,
+      timeout
+    }, { title })
+      .then((result) => {
+        if (result.ok === false || (result.data && result.data.length == 0)) {
+          if (retryTimes === 0) throw new Error(`Category not found '${title}'`);
           return new Promise((resolve) => {
             setTimeout(() => {
-              resolve(categoryIdByTitle(obj, property, title, retryTimes - 1, retryTimeout, parent));
-            }, retryTimeout);
+              resolve(categoryIdByTitle(obj, property, title, retryTimes - 1, retryInterval, parent));
+            }, retryInterval);
           })
         }
         categoryMapByTitle.set(title, result.data[0].id);
@@ -67,15 +69,15 @@ function helpers(base) {
   };
 
   const allowedFunctions = {
-    categoryIdByTitle: categoryIdByTitle,
-    productIdBySku: productIdBySku
+    categoryIdByTitle,
+    productIdBySku
   };
 
   function handleFunction(promises, obj, property, value) {
     const mach = value.match(/^(\w*[^ ])\((.*)\)$/);
     if (mach) {
       if (allowedFunctions[mach[1]]) {
-        promises.push(allowedFunctions[mach[1]](obj, property, mach[2], 3, 1000));
+        promises.push(allowedFunctions[mach[1]](obj, property, mach[2], defaultRetryTimes, defaultRetryInterval));
       } else {
         throw new Error(`Unrecognized function '${mach[0]}-${mach[1]}'`);
       }
@@ -83,12 +85,12 @@ function helpers(base) {
   }
 
   function handleFunctions(promises, obj, parent) {
-    for (var property in obj) {
+    for (const property in obj) {
       if (obj.hasOwnProperty(property)) {
-        if (typeof obj[property] == 'object') {
+        if (typeof obj[property] === 'object') {
           handleFunctions(promises, obj[property], property);
         } else {
-          if (typeof obj[property] == 'string') handleFunction(promises, obj, property, obj[property], parent);
+          if (typeof obj[property] === 'string') handleFunction(promises, obj, property, obj[property], parent);
         }
       }
     }
@@ -101,10 +103,10 @@ function helpers(base) {
         console.log(r, data);
         return base.services.call({
           name: 'tax:tax.create',
-          headers: headers,
-          timeout: timeout
+          headers,
+          timeout
         }, data);
-      })
+      });
   }
 
   function insertShipping(data) {
@@ -113,10 +115,10 @@ function helpers(base) {
         console.log(r, data);
         return base.services.call({
           name: 'cart:shipping.create',
-          headers: headers,
-          timeout: timeout
+          headers,
+          timeout
         }, data);
-      })
+      });
   }
 
   function insertCategory(data) {
@@ -124,10 +126,10 @@ function helpers(base) {
       .then(() => {
         return base.services.call({
           name: 'catalog:category.create',
-          headers: headers,
-          timeout: timeout
+          headers,
+          timeout
         }, data);
-      })
+      });
   }
 
   function insertProduct(data) {
@@ -135,10 +137,10 @@ function helpers(base) {
       .then(() => {
         return base.services.call({
           name: 'catalog:product.create',
-          headers: headers,
-          timeout: timeout
+          headers,
+          timeout
         }, data);
-      })
+      });
   }
 
   function insertPromotion(data) {
@@ -146,17 +148,18 @@ function helpers(base) {
       .then(() => {
         return base.services.call({
           name: 'promotion:promotion.create',
-          headers: headers,
-          timeout: timeout
+          headers,
+          timeout
         }, data);
-      })
+      });
   }
 
   return {
     insertTax,
     insertCategory,
     insertProduct,
-    insertPromotion
+    insertPromotion,
+    insertShipping,
   };
 }
 
