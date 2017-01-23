@@ -24,8 +24,6 @@
       {"url": "api/cart.removeFromCart.html", "body": "cart.removeFromCart"},
       {"url": "api/cart.setShippingAddress.html", "body": "cart.setShippingAddress"},
       {"url": "api/cart.setShippingMethod.html", "body": "cart.setShippingMethod"},
-      {"url": "api/cart.addressMethods.html", "body": "cart.addressMethods"},
-      {"url": "api/cart.addressMethods.html", "body": "cart.addressMethods"},
       {"url": "api/category.create.html", "body": "category.create"},
       {"url": "api/category.info.html", "body": "category.info"},
       {"url": "api/category.list.html", "body": "category.list"},

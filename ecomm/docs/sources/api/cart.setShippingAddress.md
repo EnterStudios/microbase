@@ -61,7 +61,24 @@ Returns a list of available Shipping Methods for this address:
           "phone": 2173203531,
           "instructions": "Instructions"        
         }
-    }
+    },
+    "shippingMethods": [
+       {
+         "title": "UPS Same Day",
+         "taxCode": "default",
+         "rates": [
+           {
+             "currency": "EUR",
+             "amount": 10.1
+           },
+           {
+             "currency": "GBP",
+             "amount": 9.9
+           }
+         ]
+       }
+     ]
+
 }
 ```
 
@@ -73,7 +90,7 @@ Error | Data | Description
 ------|------|------------
 validation_error | The data causing the error | Some validation error
 cart_not_found   | The cart Id | The cart was not found
-invalid_country  | The state | The country code is invalid 
+invalid_country  | The country code | The country code is invalid 
 invalid_state    | The currency code | The state is invalid for the country 
 
 # Example
