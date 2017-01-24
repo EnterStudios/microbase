@@ -1,6 +1,6 @@
 {
   "name": "micro-math-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A math example service for Base.",
   "main": "index.js",
   "homepage": "http://microbase.io",
@@ -22,7 +22,7 @@
   "author": "Nicolás Cornaglia Schlieman (https://github.com/ncornag)",
   "license": "OSL-3.0",
   "dependencies": {
-    "microbase": "0.9.0"
+    "microbase": "^0.11.2"
   },
   "devDependencies": {
     "eslint": "^2.9.0",

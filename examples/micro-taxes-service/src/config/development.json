@@ -2,6 +2,11 @@
   "logger": {
     "level": "debug"
   },
+  "transports": {
+    "http": {
+      "port": "3001"
+    }
+  },
   "db": {
     "host": "localhost",
     "db": "micro",
@@ -9,6 +14,6 @@
   },
   "gateway": {
     "host": "localhost",
-    "port": "3001"
+    "port": "3000"
   }
 }
