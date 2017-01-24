@@ -176,7 +176,7 @@ module.exports = function (base) {
           Object.assign(payload, req.params);
           Object.assign(payload, req.query);
           // Call the handler
-          return op.handler(payload, (response) => {
+          return op.handler(payload, (response = {}) => {
             return res.status(response.statusCode || 200).json(response);
           }, req, res);
 
