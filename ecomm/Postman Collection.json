@@ -170,6 +170,139 @@
 			]
 		},
 		{
+			"id": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+			"name": "Payments",
+			"description": "",
+			"order": [],
+			"folders": [
+				{
+					"id": "cd32f32e-cc65-8923-db2e-bfe927408fb4",
+					"name": "Stripe",
+					"description": "",
+					"write": true,
+					"order": [
+						"6c1387bf-ad5c-7ed2-03b1-97d465a20209",
+						"2aa436e1-ebd4-4669-c2e1-b0efc464da38"
+					],
+					"collection": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"owner": "467243",
+					"collection_id": "dc36a24a-327c-c28f-00fe-9448ad2edacf"
+				}
+			],
+			"timestamp": 1485364597863,
+			"synced": false,
+			"remote_id": 0,
+			"owner": "467243",
+			"sharedWithTeam": false,
+			"subscribed": false,
+			"remoteLink": "",
+			"remoteLinkUpdatedAt": null,
+			"public": false,
+			"createdAt": 1485364597863,
+			"updatedAt": 1485365131483,
+			"write": true,
+			"published": false,
+			"favorite": false,
+			"permissions": {},
+			"syncedPermissions": {},
+			"requests": [
+				{
+					"id": "2aa436e1-ebd4-4669-c2e1-b0efc464da38",
+					"headers": "Authorization: Basic e3tTVFJJUEVfVE9LRU59fTo=\n",
+					"url": "https://api.stripe.com/v1/charges",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"disabled": false,
+							"key": "amount",
+							"value": "200",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "currency",
+							"value": "eur",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "source",
+							"value": "tok_19fuUADDqI9GKOIfvjzqm5MV",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "description",
+							"value": "My first charge",
+							"enabled": true,
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485365269350,
+					"name": "Create Charge",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "6c1387bf-ad5c-7ed2-03b1-97d465a20209",
+					"headers": "Authorization: Basic e3tTVFJJUEVfVE9LRU59fTo=\n",
+					"url": "https://api.stripe.com/v1/tokens",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"disabled": false,
+							"key": "card[number]",
+							"value": "4242424242424242",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[exp_month]",
+							"value": "12",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[exp_year]",
+							"value": "2018",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[cvc]",
+							"value": "123",
+							"enabled": true,
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485365182801,
+					"name": "Create Token",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				}
+			]
+		},
+		{
 			"id": "43874c95-c712-3cb2-06cc-a6210d715de9",
 			"name": "micro-stock",
 			"description": "",
@@ -533,7 +666,7 @@
 			"remoteLinkUpdatedAt": null,
 			"public": false,
 			"createdAt": "2016-05-08T20:27:42.000Z",
-			"updatedAt": 1483632382034,
+			"updatedAt": 1485764685714,
 			"write": true,
 			"published": false,
 			"favorite": false,
@@ -564,12 +697,12 @@
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "POST",
-					"data": "{ \n\t\"method\": {\n      \"title\": \"UPS Same Day\",\n      \"taxCode\": \"default\",\n      \"rates\": [\n        {\n          \"amount\": 10.1,\n          \"currency\": \"EUR\"\n        },\n        {\n          \"amount\": 9.9,\n          \"currency\": \"GBP\"\n        }\n      ]\n    }\n}",
+					"data": "{ \n\t\"methodId\": \"SJi0oca4e\"\n}",
 					"dataMode": "raw",
 					"tests": "var data = JSON.parse(responseBody);\n\ntests[\"Cart exists\"] = data.id === \"{{cartId}}\"\ntests[\"Item was added\"] = data.entries > 0",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210865724,
+					"time": 1485356171349,
 					"name": "cart.setShippingMethod",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
@@ -615,7 +748,7 @@
 				{
 					"id": "3ae01089-3f1f-79c6-fed8-4b43c1226c4f",
 					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostCart}}/services/cart/v1/shipping.addressMethods",
+					"url": "http://{{hostCart}}/services/cart/v1/shipping.getShippingMethods",
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "POST",
@@ -625,8 +758,8 @@
 					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210890964,
-					"name": "shipping.addressMethods",
+					"time": 1485764675622,
+					"name": "shipping.getShippingMethods",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
 					"responses": []
@@ -634,7 +767,7 @@
 				{
 					"id": "45a43c59-d46c-9c75-8440-61bf389ed581",
 					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostCart}}/services/cart/v1/cart.info?cartId=rygEq4mKSg",
+					"url": "http://{{hostCart}}/services/cart/v1/cart.info?cartId=H19PRsec",
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "GET",
@@ -643,7 +776,7 @@
 					"tests": "var data = JSON.parse(responseBody);\n\ntests[\"Cart exists\"] = data.id == \"{{cartId}}\";",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210834477,
+					"time": 1485353823875,
 					"name": "cart.info",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
@@ -651,7 +784,7 @@
 				{
 					"id": "48921e81-c492-e2f5-4ea3-51779e018a68",
 					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hosttCart}}/services/cart/v1/cart.calculateCart?cartId=H19PRsec",
+					"url": "http://{{hostCart}}/services/cart/v1/cart.calculateCart?cartId=H19PRsec",
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "POST",
@@ -660,7 +793,7 @@
 					"tests": "var data = JSON.parse(responseBody);\n\ntests[\"Cart exists\"] = data.id === \"{{cartId}}\"\ntests[\"Item was added\"] = data.entries > 0",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210854988,
+					"time": 1485023863845,
 					"name": "cart.calculateCart",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
@@ -1090,19 +1223,25 @@
 			"values": [
 				{
 					"key": "host",
-					"type": "text",
 					"value": "dev.microbase.io",
-					"enabled": true
+					"enabled": true,
+					"type": "text"
 				},
 				{
 					"key": "categoryId",
-					"type": "text",
 					"value": "undefined",
-					"enabled": true
+					"enabled": true,
+					"type": "text"
+				},
+				{
+					"key": "cartId",
+					"value": "HJl0tFXbDe",
+					"enabled": true,
+					"type": "text"
 				}
 			],
 			"team": null,
-			"timestamp": 1484212098643
+			"timestamp": 1485764039247
 		},
 		{
 			"id": "f757ba2f-f8c8-e1bd-81d8-a0312701db0f",
@@ -1158,25 +1297,25 @@
 				},
 				{
 					"key": "hostExamplesMath",
-					"value": "{{host}}:3001",
-					"enabled": true,
-					"type": "text"
-				},
-				{
-					"key": "hostExamplesTaxes",
 					"value": "{{host}}:3000",
 					"enabled": true,
 					"type": "text"
 				},
 				{
+					"key": "hostExamplesTaxes",
+					"value": "{{host}}:3001",
+					"enabled": true,
+					"type": "text"
+				},
+				{
 					"key": "cartId",
-					"value": "rkNYH1uHg",
+					"value": "Hk4WJpw8x",
 					"enabled": true,
 					"type": "text"
 				}
 			],
 			"team": null,
-			"timestamp": 1484212098652
+			"timestamp": 1485764039259
 		},
 		{
 			"id": "fd07efff-0bd5-8b17-5c32-f76110eee49d",
@@ -1184,19 +1323,19 @@
 			"values": [
 				{
 					"key": "categoryId",
-					"type": "text",
 					"value": "undefined",
-					"enabled": true
+					"enabled": true,
+					"type": "text"
 				},
 				{
 					"key": "cartId",
-					"type": "text",
-					"value": "r1lNEYw0ge",
-					"enabled": true
+					"value": "BkgxrLtywl",
+					"enabled": true,
+					"type": "text"
 				}
 			],
 			"team": null,
-			"timestamp": 1484212098657
+			"timestamp": 1485764039268
 		}
 	],
 	"headerPresets": [
@@ -1276,8 +1415,8 @@
 			"enabled": true
 		},
 		{
-			"key": "",
-			"value": "{{host}}",
+			"key": "STRIPE_TOKEN",
+			"value": "sk_test_RzwLvjPv9pMKcPknyqJyGDRs",
 			"type": "text",
 			"enabled": true
 		}
