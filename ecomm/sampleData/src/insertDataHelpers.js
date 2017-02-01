@@ -100,7 +100,6 @@ function helpers(base) {
   function insertTax(data) {
     return Promise.all(handleFunctions([], data))
       .then((r) => {
-        console.log(r, data);
         return base.services.call({
           name: 'tax:tax.create',
           headers,
@@ -112,7 +111,6 @@ function helpers(base) {
   function insertShipping(data) {
     return Promise.all(handleFunctions([], data))
       .then((r) => {
-        console.log(r, data);
         return base.services.call({
           name: 'cart:shipping.create',
           headers,
@@ -148,6 +146,17 @@ function helpers(base) {
       .then(() => {
         return base.services.call({
           name: 'promotion:promotion.create',
+          headers,
+          timeout
+        }, data);
+      });
+  }
+
+  function insertPayment(data) {
+    return Promise.all(handleFunctions([], data))
+      .then(() => {
+        return base.services.call({
+          name: 'payment:payment.create',
           headers,
           timeout
         }, data);
