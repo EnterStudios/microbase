@@ -108,201 +108,6 @@
 			]
 		},
 		{
-			"id": "587fc559-3057-4ec7-4aaa-34a0204eacd4",
-			"name": "micro-tax",
-			"description": "",
-			"order": [
-				"75a921d2-2b82-6df8-88f3-9c03479ad60d",
-				"042ac497-e60f-6d4c-cf34-1b71e11077fd"
-			],
-			"folders": [],
-			"timestamp": 1475760957694,
-			"synced": false,
-			"remote_id": 0,
-			"owner": "467243",
-			"sharedWithTeam": false,
-			"subscribed": false,
-			"remoteLink": "",
-			"remoteLinkUpdatedAt": null,
-			"public": false,
-			"createdAt": 1475760957694,
-			"updatedAt": 1481281734143,
-			"write": true,
-			"published": false,
-			"favorite": false,
-			"permissions": {},
-			"syncedPermissions": {},
-			"requests": [
-				{
-					"id": "042ac497-e60f-6d4c-cf34-1b71e11077fd",
-					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostTax}}/services/tax/v1/tax.cartTaxes?cartId=H19PRsec",
-					"preRequestScript": "",
-					"pathVariables": {},
-					"method": "POST",
-					"data": "{ \n    \"items\" :[\n        {\n        \t\"id\": \"1\",\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 0,\n            \"price\": 100\n        }\n    ]\n}",
-					"dataMode": "raw",
-					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1484211072709,
-					"name": "tax.cartTaxes",
-					"description": "",
-					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4"
-				},
-				{
-					"id": "75a921d2-2b82-6df8-88f3-9c03479ad60d",
-					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostTax}}/services/tax/v1/tax.create",
-					"preRequestScript": "",
-					"pathVariables": {},
-					"method": "POST",
-					"data": "{\n    \"code\": \"default1\",\n    \"class\": \"default\",\n    \"title\": \"IVA 21%\",\n    \"rate\": 21,\n    \"isPercentage\": true\n}",
-					"dataMode": "raw",
-					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1484211067246,
-					"name": "tax.create",
-					"description": "",
-					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4"
-				}
-			]
-		},
-		{
-			"id": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
-			"name": "Payments",
-			"description": "",
-			"order": [],
-			"folders": [
-				{
-					"id": "cd32f32e-cc65-8923-db2e-bfe927408fb4",
-					"name": "Stripe",
-					"description": "",
-					"write": true,
-					"order": [
-						"6c1387bf-ad5c-7ed2-03b1-97d465a20209",
-						"2aa436e1-ebd4-4669-c2e1-b0efc464da38"
-					],
-					"collection": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
-					"owner": "467243",
-					"collection_id": "dc36a24a-327c-c28f-00fe-9448ad2edacf"
-				}
-			],
-			"timestamp": 1485364597863,
-			"synced": false,
-			"remote_id": 0,
-			"owner": "467243",
-			"sharedWithTeam": false,
-			"subscribed": false,
-			"remoteLink": "",
-			"remoteLinkUpdatedAt": null,
-			"public": false,
-			"createdAt": 1485364597863,
-			"updatedAt": 1485365131483,
-			"write": true,
-			"published": false,
-			"favorite": false,
-			"permissions": {},
-			"syncedPermissions": {},
-			"requests": [
-				{
-					"id": "2aa436e1-ebd4-4669-c2e1-b0efc464da38",
-					"headers": "Authorization: Basic e3tTVFJJUEVfVE9LRU59fTo=\n",
-					"url": "https://api.stripe.com/v1/charges",
-					"preRequestScript": null,
-					"pathVariables": {},
-					"method": "POST",
-					"data": [
-						{
-							"disabled": false,
-							"key": "amount",
-							"value": "200",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "currency",
-							"value": "eur",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "source",
-							"value": "tok_19fuUADDqI9GKOIfvjzqm5MV",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "description",
-							"value": "My first charge",
-							"enabled": true,
-							"type": "text"
-						}
-					],
-					"dataMode": "urlencoded",
-					"tests": null,
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1485365269350,
-					"name": "Create Charge",
-					"description": "",
-					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
-					"responses": []
-				},
-				{
-					"id": "6c1387bf-ad5c-7ed2-03b1-97d465a20209",
-					"headers": "Authorization: Basic e3tTVFJJUEVfVE9LRU59fTo=\n",
-					"url": "https://api.stripe.com/v1/tokens",
-					"preRequestScript": null,
-					"pathVariables": {},
-					"method": "POST",
-					"data": [
-						{
-							"disabled": false,
-							"key": "card[number]",
-							"value": "4242424242424242",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "card[exp_month]",
-							"value": "12",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "card[exp_year]",
-							"value": "2018",
-							"enabled": true,
-							"type": "text"
-						},
-						{
-							"disabled": false,
-							"key": "card[cvc]",
-							"value": "123",
-							"enabled": true,
-							"type": "text"
-						}
-					],
-					"dataMode": "urlencoded",
-					"tests": null,
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1485365182801,
-					"name": "Create Token",
-					"description": "",
-					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
-					"responses": []
-				}
-			]
-		},
-		{
 			"id": "43874c95-c712-3cb2-06cc-a6210d715de9",
 			"name": "micro-stock",
 			"description": "",
@@ -419,17 +224,19 @@
 			]
 		},
 		{
-			"id": "4b35f66b-38aa-18d7-85f9-add38785c8f8",
-			"name": "elasticsearch",
+			"id": "587fc559-3057-4ec7-4aaa-34a0204eacd4",
+			"name": "micro-tax",
 			"description": "",
 			"order": [
-				"00daed12-a29e-ac35-9d62-a3af6f3d7dc4",
-				"703a1c10-8dc0-7038-af0f-715106f7a74f",
-				"4ad70d79-f495-d9ba-ad35-26acd58fe815",
-				"c1374ebd-b85e-020d-a24f-5882c083a2a3"
+				"75a921d2-2b82-6df8-88f3-9c03479ad60d",
+				"9a4398f9-852e-a0b0-1d43-4d912d444cec",
+				"79de04d6-8ef3-6a0c-232c-1915c3ebc57d",
+				"db92a4a2-ae59-0d59-62de-f8c341b39870",
+				"41a3a3fe-495a-7ce5-f273-747ab29f040f",
+				"042ac497-e60f-6d4c-cf34-1b71e11077fd"
 			],
 			"folders": [],
-			"timestamp": 1465836740698,
+			"timestamp": 1475760957694,
 			"synced": false,
 			"remote_id": 0,
 			"owner": "467243",
@@ -438,8 +245,8 @@
 			"remoteLink": "",
 			"remoteLinkUpdatedAt": null,
 			"public": false,
-			"createdAt": 1465836740698,
-			"updatedAt": 1476355573780,
+			"createdAt": 1475760957694,
+			"updatedAt": 1485951256939,
 			"write": true,
 			"published": false,
 			"favorite": false,
@@ -447,112 +254,358 @@
 			"syncedPermissions": {},
 			"requests": [
 				{
-					"id": "00daed12-a29e-ac35-9d62-a3af6f3d7dc4",
-					"headers": "",
-					"url": "http://localhost:9200/_cat/indices?v",
-					"preRequestScript": null,
-					"pathVariables": {},
-					"method": "GET",
-					"data": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}",
-					"dataMode": "raw",
-					"tests": null,
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1476355256692,
-					"name": "generic:indices",
-					"description": "",
-					"collectionId": "4b35f66b-38aa-18d7-85f9-add38785c8f8",
-					"responses": []
-				},
-				{
-					"id": "4ad70d79-f495-d9ba-ad35-26acd58fe815",
-					"headers": "",
-					"url": "http://localhost:9200/products",
-					"preRequestScript": null,
-					"pathVariables": {},
-					"method": "DELETE",
-					"data": null,
-					"dataMode": "params",
-					"tests": null,
-					"currentHelper": "normal",
-					"helperAttributes": {},
-					"time": 1465836851565,
-					"name": "products:removeindex",
-					"description": "",
-					"collectionId": "4b35f66b-38aa-18d7-85f9-add38785c8f8",
-					"responses": []
-				},
-				{
-					"id": "703a1c10-8dc0-7038-af0f-715106f7a74f",
-					"headers": "",
-					"url": "http://localhost:9200/products/product/_search?q=*",
-					"preRequestScript": null,
+					"id": "042ac497-e60f-6d4c-cf34-1b71e11077fd",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.cartTaxes?cartId=H19PRsec",
+					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "POST",
-					"data": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}",
+					"data": "{ \n    \"items\" :[\n        {\n        \t\"id\": \"1\",\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 0,\n            \"price\": 100\n        }\n    ]\n}",
 					"dataMode": "raw",
-					"tests": null,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1476355569515,
-					"name": "products:search",
+					"time": 1484211072709,
+					"name": "tax.cartTaxes",
 					"description": "",
-					"collectionId": "4b35f66b-38aa-18d7-85f9-add38785c8f8",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4"
+				},
+				{
+					"id": "41a3a3fe-495a-7ce5-f273-747ab29f040f",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.update?id=BJgnZdVJ_g",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n\t\"active\": false\n}",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485951280978,
+					"name": "tax.update",
+					"description": "",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4",
 					"responses": []
 				},
 				{
-					"id": "c1374ebd-b85e-020d-a24f-5882c083a2a3",
-					"headers": "",
-					"url": "http://localhost:9200/products/product/_mapping",
+					"id": "75a921d2-2b82-6df8-88f3-9c03479ad60d",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.create",
+					"preRequestScript": "",
 					"pathVariables": {},
-					"preRequestScript": null,
-					"method": "GET",
-					"collectionId": "4b35f66b-38aa-18d7-85f9-add38785c8f8",
-					"data": null,
-					"dataMode": "params",
-					"name": "products:mapping",
-					"description": "",
-					"descriptionFormat": "html",
-					"time": 1465901722021,
-					"version": 2,
-					"responses": [],
-					"tests": null,
+					"method": "POST",
+					"data": "{\n    \"code\": \"default1\",\n    \"class\": \"default\",\n    \"title\": \"IVA 21%\",\n    \"rate\": 21,\n    \"isPercentage\": true\n}",
+					"dataMode": "raw",
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
 					"currentHelper": "normal",
-					"helperAttributes": {}
+					"helperAttributes": {},
+					"time": 1484211067246,
+					"name": "tax.create",
+					"description": "",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4"
+				},
+				{
+					"id": "79de04d6-8ef3-6a0c-232c-1915c3ebc57d",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.list?active=true",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "raw",
+					"tests": "",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485949868254,
+					"name": "tax.list",
+					"description": "",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4"
+				},
+				{
+					"id": "9a4398f9-852e-a0b0-1d43-4d912d444cec",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.info?id=rkMNt1Er",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "GET",
+					"data": "",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485951292666,
+					"name": "tax.info",
+					"description": "",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4",
+					"responses": []
+				},
+				{
+					"id": "db92a4a2-ae59-0d59-62de-f8c341b39870",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostTax}}/services/tax/v1/tax.remove?id=Hylj_D4Jux",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485950455254,
+					"name": "tax.remove",
+					"description": "",
+					"collectionId": "587fc559-3057-4ec7-4aaa-34a0204eacd4",
+					"responses": []
+				}
+			]
+		},
+		{
+			"id": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+			"name": "Payments",
+			"description": "",
+			"order": [
+				"38ccc6a1-4ffb-f155-e921-6442511e99f4",
+				"c847fb5b-f83f-9a0e-20d1-fe4a20c82e6d",
+				"26a9bd67-2c81-9450-0022-eb4881bac9a7",
+				"383c7067-8101-3c32-085e-31e27645f4a1",
+				"fe66ac8d-0b90-79c5-4c80-4a24ebbbb071"
+			],
+			"folders": [
+				{
+					"id": "48a49c88-8183-ea6e-0034-86d8a427db0c",
+					"name": "Stripe",
+					"description": "",
+					"write": true,
+					"order": [
+						"4eb6b7cf-f2e4-c53d-7c5b-262d64bac3c0",
+						"1669548f-1e5f-6e4d-f0fc-d40055d0f4fc"
+					],
+					"collection": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"owner": "467243",
+					"collection_id": "dc36a24a-327c-c28f-00fe-9448ad2edacf"
+				}
+			],
+			"timestamp": 1485364597863,
+			"synced": false,
+			"remote_id": 0,
+			"owner": "467243",
+			"sharedWithTeam": false,
+			"subscribed": false,
+			"remoteLink": "",
+			"remoteLinkUpdatedAt": null,
+			"public": false,
+			"createdAt": 1485364597863,
+			"updatedAt": 1486053028306,
+			"write": true,
+			"published": false,
+			"favorite": false,
+			"permissions": {},
+			"syncedPermissions": {},
+			"requests": [
+				{
+					"id": "1669548f-1e5f-6e4d-f0fc-d40055d0f4fc",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/stripe.charges.create",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n\t\"source\": \"tok_19inYA2eZvKYlo2CIaMyzoyi\",\n    \"amount\": 10000,\n\t\"currency\":\"EUR\",\n\t\"capture\": true\n}",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1486053762530,
+					"name": "payment.stripe.charges.create",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "26a9bd67-2c81-9450-0022-eb4881bac9a7",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/payment.list?active=true",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "GET",
+					"data": [],
+					"dataMode": "raw",
+					"tests": "",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485949832404,
+					"name": "payment.list",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf"
+				},
+				{
+					"id": "383c7067-8101-3c32-085e-31e27645f4a1",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/payment.remove?id=Hylj_D4Jux",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485950345299,
+					"name": "payment.remove",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "38ccc6a1-4ffb-f155-e921-6442511e99f4",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/payment.create",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n    \"title\" : \"Credit Card\",\n    \"active\" : true,\n    \"gateway\" : \"stripe\"\n  }",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485944689981,
+					"name": "payment.create",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "4eb6b7cf-f2e4-c53d-7c5b-262d64bac3c0",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/stripe.tokens.create",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n\t\"card\":{\n\t    \"number\": \"4242424242424242\",\n\t    \"exp_month\":\"12\",\n\t    \"exp_year\":\"2018\",\n\t    \"cvc\":\"123\"\n\t}\n}",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1486053851161,
+					"name": "payment.stripe.tokens.create",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "c847fb5b-f83f-9a0e-20d1-fe4a20c82e6d",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/payment.info?id=BJgnZdVJ_g",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "GET",
+					"data": "",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485950340343,
+					"name": "payment.info",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
+				},
+				{
+					"id": "fe66ac8d-0b90-79c5-4c80-4a24ebbbb071",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostPayment}}/services/payment/v1/payment.update?id=BJgnZdVJ_g",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n\t\"active\": true\n}",
+					"dataMode": "raw",
+					"version": 2,
+					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1485951287597,
+					"name": "payment.update",
+					"description": "",
+					"collectionId": "dc36a24a-327c-c28f-00fe-9448ad2edacf",
+					"responses": []
 				}
 			]
 		},
 		{
 			"id": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
-			"owner": "467243",
 			"name": "micro",
 			"description": null,
-			"order": [
-				"afc1d7bd-bf60-a4cf-0b15-df9589d3db03",
-				"bbd79686-8541-3157-220b-b04dd873a3ea",
-				"aa8a35e0-9b48-b36a-5135-c52da3b6cf6b",
-				"0ec274b1-fdbd-2afd-2f4c-c6060bd44164"
+			"order": [],
+			"folders": [
+				{
+					"id": "f5d104a2-7574-749e-d748-10ac88a654e7",
+					"name": "Elasticsearch",
+					"description": "",
+					"write": true,
+					"order": [
+						"e5700578-d7d6-d5c5-e100-45730ac16488",
+						"60bf3d38-8abe-dee1-aee9-d01b1fd4d715",
+						"8a2d2322-5219-a121-d6f2-4e0c1533069c",
+						"929224c8-6df1-b8f1-c2e7-a35cfe4334d3"
+					],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"owner": "467243",
+					"collection_id": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+				},
+				{
+					"id": "41564910-5fd6-4d2c-5954-613b6e2fb4b2",
+					"name": "Stripe",
+					"description": "",
+					"write": true,
+					"order": [
+						"c57d572b-8b1e-8036-04eb-ec0284358967",
+						"2210c5f3-20f2-b70b-3014-e32c93559501"
+					],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"owner": "467243",
+					"collection_id": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+				},
+				{
+					"id": "fd219ace-7926-7649-9b2d-ce3bd29dd822",
+					"name": "Examples",
+					"description": "",
+					"write": true,
+					"order": [
+						"afc1d7bd-bf60-a4cf-0b15-df9589d3db03",
+						"bbd79686-8541-3157-220b-b04dd873a3ea",
+						"aa8a35e0-9b48-b36a-5135-c52da3b6cf6b",
+						"0ec274b1-fdbd-2afd-2f4c-c6060bd44164"
+					],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"owner": "467243",
+					"collection_id": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+				}
 			],
-			"folders": [],
 			"timestamp": 0,
 			"synced": true,
 			"remote_id": "0",
+			"owner": "467243",
 			"sharedWithTeam": false,
 			"subscribed": false,
 			"remoteLink": null,
 			"remoteLinkUpdatedAt": null,
 			"public": false,
 			"createdAt": "2016-04-13T16:32:08.000Z",
-			"updatedAt": "2016-08-29T18:11:40.000Z",
+			"updatedAt": "2017-02-01T10:17:00.752Z",
 			"write": true,
 			"published": false,
 			"favorite": false,
 			"permissions": {},
 			"syncedPermissions": {},
-			"lastUpdatedBy": "467243",
-			"lastRevision": 515252083,
-			"team": null,
-			"shared": false,
 			"requests": [
 				{
 					"id": "0ec274b1-fdbd-2afd-2f4c-c6060bd44164",
@@ -582,7 +635,120 @@
 					"time": 1484210819422,
 					"name": "oauth:token-generation",
 					"description": "",
-					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "fd219ace-7926-7649-9b2d-ce3bd29dd822"
+				},
+				{
+					"id": "2210c5f3-20f2-b70b-3014-e32c93559501",
+					"headers": "Authorization: Bearer {{STRIPE_TOKEN}}\n",
+					"url": "https://api.stripe.com/v1/charges",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"disabled": false,
+							"key": "amount",
+							"value": "200",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "currency",
+							"value": "eur",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "source",
+							"value": "tok_19fuUADDqI9GKOIfvjzqm5MV",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "description",
+							"value": "My first charge",
+							"enabled": true,
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1486035079527,
+					"name": "Create Charge",
+					"description": "",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"responses": []
+				},
+				{
+					"id": "60bf3d38-8abe-dee1-aee9-d01b1fd4d715",
+					"headers": "",
+					"url": "http://localhost:9200/products/product/_mapping",
+					"pathVariables": {},
+					"preRequestScript": null,
+					"method": "GET",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"data": null,
+					"dataMode": "params",
+					"name": "products:mapping",
+					"description": "",
+					"descriptionFormat": "html",
+					"time": 1465901722021,
+					"version": 2,
+					"responses": [],
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "f5d104a2-7574-749e-d748-10ac88a654e7",
+					"owner": "467243"
+				},
+				{
+					"id": "8a2d2322-5219-a121-d6f2-4e0c1533069c",
+					"headers": "",
+					"url": "http://localhost:9200/_cat/indices?v",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "GET",
+					"data": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}",
+					"dataMode": "raw",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1476355256692,
+					"name": "generic:indices",
+					"description": "",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"responses": [],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "f5d104a2-7574-749e-d748-10ac88a654e7",
+					"owner": "467243"
+				},
+				{
+					"id": "929224c8-6df1-b8f1-c2e7-a35cfe4334d3",
+					"headers": "",
+					"url": "http://localhost:9200/products",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "DELETE",
+					"data": null,
+					"dataMode": "params",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1465836851565,
+					"name": "products:removeindex",
+					"description": "",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"responses": [],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "f5d104a2-7574-749e-d748-10ac88a654e7",
+					"owner": "467243"
 				},
 				{
 					"id": "aa8a35e0-9b48-b36a-5135-c52da3b6cf6b",
@@ -599,7 +765,8 @@
 					"time": 1484210813598,
 					"name": "taxes:vat",
 					"description": "",
-					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "fd219ace-7926-7649-9b2d-ce3bd29dd822"
 				},
 				{
 					"id": "afc1d7bd-bf60-a4cf-0b15-df9589d3db03",
@@ -616,7 +783,8 @@
 					"time": 1484210798736,
 					"name": "math:ping",
 					"description": "",
-					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "fd219ace-7926-7649-9b2d-ce3bd29dd822"
 				},
 				{
 					"id": "bbd79686-8541-3157-220b-b04dd873a3ea",
@@ -633,7 +801,76 @@
 					"time": 1484210804598,
 					"name": "math:multiply",
 					"description": "",
-					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9"
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "fd219ace-7926-7649-9b2d-ce3bd29dd822"
+				},
+				{
+					"id": "c57d572b-8b1e-8036-04eb-ec0284358967",
+					"headers": "Authorization: Bearer {{STRIPE_TOKEN}}\n",
+					"url": "https://api.stripe.com/v1/tokens",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "POST",
+					"data": [
+						{
+							"disabled": false,
+							"key": "card[number]",
+							"value": "4242424242424242",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[exp_month]",
+							"value": "12",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[exp_year]",
+							"value": "2018",
+							"enabled": true,
+							"type": "text"
+						},
+						{
+							"disabled": false,
+							"key": "card[cvc]",
+							"value": "123",
+							"enabled": true,
+							"type": "text"
+						}
+					],
+					"dataMode": "urlencoded",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1486035075305,
+					"name": "Create Token",
+					"description": "",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"responses": []
+				},
+				{
+					"id": "e5700578-d7d6-d5c5-e100-45730ac16488",
+					"headers": "",
+					"url": "http://localhost:9200/products/product/_search?q=*",
+					"preRequestScript": null,
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}",
+					"dataMode": "raw",
+					"tests": null,
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1476355569515,
+					"name": "products:search",
+					"description": "",
+					"collectionId": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"responses": [],
+					"collection": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+					"folder": "f5d104a2-7574-749e-d748-10ac88a654e7",
+					"owner": "467243"
 				}
 			]
 		},
@@ -641,21 +878,44 @@
 			"id": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
 			"name": "micro-cart",
 			"description": "",
-			"order": [
-				"be32f58a-a98b-2ae1-46b6-00574073f644",
-				"45a43c59-d46c-9c75-8440-61bf389ed581",
-				"afe1f8af-0663-c0c9-435e-51d11ec099ac",
-				"671e9550-24be-e6b8-7d2b-c9f35ad996cd",
-				"041ae5c8-9833-d800-3ca8-5e11e6197906",
-				"48921e81-c492-e2f5-4ea3-51779e018a68",
-				"5370ee85-f4bf-a4f1-d5ad-3fdaf471bb2d",
-				"1765ae15-82bc-2453-a6a8-5bac5cf43623",
-				"f1e6c9d2-08c7-87a3-ffe3-89119812fd7d",
-				"331e18fb-b2b9-8cb1-ca33-c8d183709cf8",
-				"36b68977-2824-4819-b6b3-12b36c1b1e22",
-				"3ae01089-3f1f-79c6-fed8-4b43c1226c4f"
+			"order": [],
+			"folders": [
+				{
+					"id": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574",
+					"name": "cart",
+					"description": "",
+					"write": true,
+					"order": [
+						"be32f58a-a98b-2ae1-46b6-00574073f644",
+						"45a43c59-d46c-9c75-8440-61bf389ed581",
+						"afe1f8af-0663-c0c9-435e-51d11ec099ac",
+						"671e9550-24be-e6b8-7d2b-c9f35ad996cd",
+						"041ae5c8-9833-d800-3ca8-5e11e6197906",
+						"48921e81-c492-e2f5-4ea3-51779e018a68",
+						"5370ee85-f4bf-a4f1-d5ad-3fdaf471bb2d",
+						"1765ae15-82bc-2453-a6a8-5bac5cf43623",
+						"3144ce9a-da19-9136-d10f-18fc8ed8cb4d"
+					],
+					"collection": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"owner": "467243",
+					"collection_id": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+				},
+				{
+					"id": "b814cd35-0c2b-69a9-4336-4d660cf1bfb4",
+					"name": "shipping",
+					"description": "",
+					"write": true,
+					"order": [
+						"f1e6c9d2-08c7-87a3-ffe3-89119812fd7d",
+						"331e18fb-b2b9-8cb1-ca33-c8d183709cf8",
+						"36b68977-2824-4819-b6b3-12b36c1b1e22",
+						"3ae01089-3f1f-79c6-fed8-4b43c1226c4f"
+					],
+					"collection": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"owner": "467243",
+					"collection_id": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+				}
 			],
-			"folders": [],
 			"timestamp": 0,
 			"synced": true,
 			"remote_id": "0",
@@ -666,7 +926,7 @@
 			"remoteLinkUpdatedAt": null,
 			"public": false,
 			"createdAt": "2016-05-08T20:27:42.000Z",
-			"updatedAt": 1485764685714,
+			"updatedAt": 1486033777972,
 			"write": true,
 			"published": false,
 			"favorite": false,
@@ -688,7 +948,8 @@
 					"time": 1484210849885,
 					"name": "cart.removeFromCart",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "1765ae15-82bc-2453-a6a8-5bac5cf43623",
@@ -705,12 +966,30 @@
 					"time": 1485356171349,
 					"name": "cart.setShippingMethod",
 					"description": "",
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
+				},
+				{
+					"id": "3144ce9a-da19-9136-d10f-18fc8ed8cb4d",
+					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
+					"url": "http://{{hostCart}}/services/cart/v1/cart.setPaymentGateway?cartId=H19PRsec",
+					"preRequestScript": "",
+					"pathVariables": {},
+					"method": "POST",
+					"data": "{ \n\t\"paymentId\": \"BJgnZdVJ_g\"\n}",
+					"dataMode": "raw",
+					"tests": "var data = JSON.parse(responseBody);\n\ntests[\"Cart exists\"] = data.id === \"{{cartId}}\"\ntests[\"Item was added\"] = data.entries > 0",
+					"currentHelper": "normal",
+					"helperAttributes": {},
+					"time": 1486033967824,
+					"name": "cart.setPaymentGateway",
+					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
 				},
 				{
 					"id": "331e18fb-b2b9-8cb1-ca33-c8d183709cf8",
 					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostCart}}/services/cart/v1/shipping.info?shippingId=SJi0oca4e",
+					"url": "http://{{hostCart}}/services/cart/v1/shipping.info?id=SJi0oca4e",
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "GET",
@@ -720,7 +999,7 @@
 					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210877180,
+					"time": 1485950256371,
 					"name": "shipping.info",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
@@ -729,7 +1008,7 @@
 				{
 					"id": "36b68977-2824-4819-b6b3-12b36c1b1e22",
 					"headers": "Content-Type: application/json\nAccept: application/json\nAuthorization: Bearer {{token}}\n",
-					"url": "http://{{hostCart}}/services/cart/v1/shipping.remove?shippingId=SJi0oca4e",
+					"url": "http://{{hostCart}}/services/cart/v1/shipping.remove?id=SJi0oca4e",
 					"preRequestScript": "",
 					"pathVariables": {},
 					"method": "POST",
@@ -739,7 +1018,7 @@
 					"tests": "var data = JSON.parse(responseBody);\n\npostman.setEnvironmentVariable(\"categoryId\", data.id)",
 					"currentHelper": "normal",
 					"helperAttributes": {},
-					"time": 1484210885396,
+					"time": 1485950260478,
 					"name": "shipping.remove",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
@@ -762,7 +1041,8 @@
 					"name": "shipping.getShippingMethods",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
-					"responses": []
+					"responses": [],
+					"folder": "b814cd35-0c2b-69a9-4336-4d660cf1bfb4"
 				},
 				{
 					"id": "45a43c59-d46c-9c75-8440-61bf389ed581",
@@ -779,7 +1059,8 @@
 					"time": 1485353823875,
 					"name": "cart.info",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "48921e81-c492-e2f5-4ea3-51779e018a68",
@@ -796,7 +1077,8 @@
 					"time": 1485023863845,
 					"name": "cart.calculateCart",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "5370ee85-f4bf-a4f1-d5ad-3fdaf471bb2d",
@@ -813,7 +1095,8 @@
 					"time": 1484210859917,
 					"name": "cart.setShippingAddress",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "671e9550-24be-e6b8-7d2b-c9f35ad996cd",
@@ -830,7 +1113,8 @@
 					"time": 1484210844277,
 					"name": "cart.addToCart (bulk)",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "afe1f8af-0663-c0c9-435e-51d11ec099ac",
@@ -847,7 +1131,8 @@
 					"time": 1484212306334,
 					"name": "cart.addToCart",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "be32f58a-a98b-2ae1-46b6-00574073f644",
@@ -864,7 +1149,8 @@
 					"time": 1484210828293,
 					"name": "cart.create (anon)",
 					"description": "",
-					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb"
+					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
+					"folder": "ed1c1fdf-50d1-5ff0-0000-1b906bf69574"
 				},
 				{
 					"id": "f1e6c9d2-08c7-87a3-ffe3-89119812fd7d",
@@ -883,7 +1169,8 @@
 					"name": "shipping.create",
 					"description": "",
 					"collectionId": "8faec062-617f-7ef1-8ebb-c09b3a69aebb",
-					"responses": []
+					"responses": [],
+					"folder": "b814cd35-0c2b-69a9-4336-4d660cf1bfb4"
 				}
 			]
 		},
@@ -951,7 +1238,7 @@
 			"remoteLinkUpdatedAt": null,
 			"public": false,
 			"createdAt": "2016-06-08T17:12:41.000Z",
-			"updatedAt": 1482604257144,
+			"updatedAt": 1485949762150,
 			"write": true,
 			"published": false,
 			"favorite": false,
@@ -1241,7 +1528,7 @@
 				}
 			],
 			"team": null,
-			"timestamp": 1485764039247
+			"timestamp": 1486053063932
 		},
 		{
 			"id": "f757ba2f-f8c8-e1bd-81d8-a0312701db0f",
@@ -1290,6 +1577,12 @@
 					"type": "text"
 				},
 				{
+					"key": "hostPayment",
+					"value": "{{host}}:3007",
+					"type": "text",
+					"enabled": true
+				},
+				{
 					"key": "hostOauth",
 					"value": "{{host}}:4000",
 					"enabled": true,
@@ -1315,7 +1608,7 @@
 				}
 			],
 			"team": null,
-			"timestamp": 1485764039259
+			"timestamp": 1486053063937
 		},
 		{
 			"id": "fd07efff-0bd5-8b17-5c32-f76110eee49d",
@@ -1335,7 +1628,7 @@
 				}
 			],
 			"team": null,
-			"timestamp": 1485764039268
+			"timestamp": 1486053063943
 		}
 	],
 	"headerPresets": [
@@ -1415,8 +1708,8 @@
 			"enabled": true
 		},
 		{
-			"key": "STRIPE_TOKEN",
-			"value": "sk_test_RzwLvjPv9pMKcPknyqJyGDRs",
+			"key": "hostPayment",
+			"value": "{{host}}",
 			"type": "text",
 			"enabled": true
 		}
