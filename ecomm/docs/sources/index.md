@@ -88,6 +88,15 @@ project. For the most up to date ones refer to the original repositories:
 * Almost fullfilled promotion detection with optional thresholds
 * Easily creation of custom firing conditions
 
+[Payment Service](https://github.com/ncornag/micro-payment-service)
+
+* Default implementations for some providers
+* Easy implement your own gateway
+
+[Recommendation Service](https://github.com/ncornag/micro-recommendation-service)
+
+* gathers and process 'Also viewd' products
+
 [Oauth Service](https://github.com/ncornag/micro-oauth-service)
 
 * API tokens
@@ -185,6 +194,8 @@ NODE_ENV=docker node insertData.js Category ./data/dataCategories.json
 NODE_ENV=docker node insertData.js Product ./data/dataProductsShoes.json
 NODE_ENV=docker node insertData.js Product ./data/dataProductsFridges.json
 NODE_ENV=docker node insertData.js Promotion ./data/dataPromotions.json
+NODE_ENV=docker node insertData.js Shipping ./data/dataShippings.json
+NODE_ENV=docker node insertData.js Payment ./data/dataPayments.json
 ```
 
 ## Postman

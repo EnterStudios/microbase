@@ -36,26 +36,23 @@ Returns a Cart object:
 {
   "ok": true,
   "cart": {
-  
-  },
-  "methods": [
-    {
-      "title": "UPS Same Day",
-      "taxCode": "default",
-      "rates": [
-        { "currency": "EUR", "amount": 10.1 },
-        { "currency": "GBP", "amount": 9.9 }
-      ]
-    },
-    {
-      "title": "UPS Next Day",
-      "taxCode": "default",
-      "rates": [
-        { "currency": "EUR", "amount": 10.1 },
-        { "currency": "GBP", "amount": 9.9 }
-      ]
+    ...
+    "shippingMethod" : {
+        "id" : "SJi0oca4e", 
+        "title" : "UPS Same Day", 
+        "taxCode" : "default", 
+        "rates" : [
+            {
+                "amount" : 10.1, 
+                "currency" : "EUR"
+            }, 
+            {
+                "amount" : 9.9, 
+                "currency" : "GBP"
+            }
+        ]
     }
-  ]
+  }
 }
 ```
 
@@ -67,6 +64,7 @@ Error | Data | Description
 ------|------|------------
 validation_error | The data causing the error | Some validation error
 cart_not_found   | The cart Id | The cart was not found
+unknown_shipping_method | - | The shipping method id is not in the allowed shipping methods for this cart address
 
 # Example
 

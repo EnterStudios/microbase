@@ -10,7 +10,7 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
 token      | yes | Token   | Bearer xxxxx... | Authentication token.
-shippingId | yes | String  | SJi0oca4e       | The Shippint Methos id to get info on.
+id | yes | String  | SJi0oca4e       | The Shippint Methos id to get info on.
 
 # Response
 
@@ -64,7 +64,7 @@ shipping_method_not_found | - | The Shipping Method was not found
 
 ```bash
 curl --request GET \
-  --url http://localhost:3000/services/cart/v1/shipping.info?shippingId=SJi0oca4e \
+  --url http://localhost:3000/services/cart/v1/shipping.info?id=SJi0oca4e \
   --header 'authorization: Bearer xxxxx...' \
   --header 'accept: application/json' \
   --header 'content-type: application/json'

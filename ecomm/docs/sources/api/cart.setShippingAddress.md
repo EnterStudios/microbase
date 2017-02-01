@@ -37,7 +37,7 @@ If there is only one Shipping Method available, the Cart gets that method assign
 
 # Response
 
-Returns a list of available Shipping Methods for this address:
+Returns the modified Cart and a list of available Shipping Methods for the address:
 
 ```json
 {

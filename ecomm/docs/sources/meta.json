@@ -8,10 +8,11 @@
     "assetspath": "http://microbase.io/",
     "level": 0,
     "services": [
-      {"url": "micro-catalog-service.html", "body": "Catalog"},
       {"url": "micro-cart-service.html", "body": "Cart"},
+      {"url": "micro-catalog-service.html", "body": "Catalog"},
       {"url": "micro-customer-service.html", "body": "Customer"},
       {"url": "micro-oauth-service.html", "body": "Oauth"},
+      {"url": "micro-payment-service.html", "body": "Payment"},
       {"url": "micro-promotion-service.html", "body": "Promotion"},
       {"url": "micro-recommendation-service.html", "body": "Recommendation"},
       {"url": "micro-stock-service.html", "body": "Stock"},
@@ -22,6 +23,7 @@
       {"url": "api/cart.create.html", "body": "cart.create"},
       {"url": "api/cart.info.html", "body": "cart.info"},
       {"url": "api/cart.removeFromCart.html", "body": "cart.removeFromCart"},
+      {"url": "api/cart.setPaymentGateway.html", "body": "cart.setPaymentGateway"},
       {"url": "api/cart.setShippingAddress.html", "body": "cart.setShippingAddress"},
       {"url": "api/cart.setShippingMethod.html", "body": "cart.setShippingMethod"},
       {"url": "api/category.create.html", "body": "category.create"},
@@ -39,6 +41,11 @@
       {"url": "api/customer.address.remove.html", "body": "customer.address.remove"},
       {"url": "api/customer.address.update.html", "body": "customer.address.update"},
       {"url": "api/customer.checkCredentials.html", "body": "customer.checkCredentials"},
+      {"url": "api/payment.create.html", "body": "payment.create"},
+      {"url": "api/payment.info.html", "body": "payment.info"},
+      {"url": "api/payment.list.html", "body": "payment.list"},
+      {"url": "api/payment.remove.html", "body": "payment.remove"},
+      {"url": "api/payment.update.html", "body": "payment.update"},
       {"url": "api/product.create.html", "body": "product.create"},
       {"url": "api/product.info.html", "body": "product.info"},
       {"url": "api/product.list.html", "body": "product.list"},
@@ -50,7 +57,7 @@
       {"url": "api/shipping.create.html", "body": "shipping.create"},
       {"url": "api/shipping.info.html", "body": "shipping.info"},
       {"url": "api/shipping.remove.html", "body": "shipping.remove"},
-      {"url": "api/shipping.addressMethods.html", "body": "shipping.addressMethods"},
+      {"url": "api/shipping.getShippingMethods.html", "body": "shipping.getShippingMethods"},
       {"url": "api/stock.create.html", "body": "stock.create"},
       {"url": "api/stock.info.html", "body": "stock.info"},
       {"url": "api/stock.reserve.html", "body": "stock.reserve"},
@@ -62,9 +69,7 @@
       {"url": "api/tax.info.html", "body": "tax.info"},
       {"url": "api/tax.list.html", "body": "tax.list"},
       {"url": "api/tax.remove.html", "body": "tax.remove"},
-      {"url": "api/tax.update.html", "body": "tax.update"},
-      {"url": "api/shipping.create.html", "body": "shipping.create"},
-      {"url": "api/shipping.remove.html", "body": "shipping.remove"}
+      {"url": "api/tax.update.html", "body": "tax.update"}
     ]
   }
 }

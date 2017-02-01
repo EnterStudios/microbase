@@ -31,6 +31,8 @@ ecosystem.
 
 # Features
 
+* gathers and process 'Also viewd' products
+
 # Entities
 
 # API
