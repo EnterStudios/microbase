@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token         | yes | Token  | Bearer xxxxx... | Authentication token.
 id            | no  | String | HJ4g4fACrH        | The id of the Product to update.
 
 ## Updatable fields

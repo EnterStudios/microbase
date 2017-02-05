@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token        | yes  | Token        | Bearer xxxxx... | Authentication token.
 id           | no   | String List  | rJGOMDf         | Comma separated Payment Method ids list.
 title        | no   | String       | Credit          | Title /${title}/i regex expression.
 gateway      | no   | String       | stripe          | Title /${gateway}/i regex expression.

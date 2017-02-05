@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token    | yes | Token     | Bearer xxxxx... | Authentication token.
 title    | yes | String    | Credit Card     | Payment method title.
 gateway  | yes | String    | stripe          | Processing gateway code.   
 active   | yes | Boolean   | true            | Active or disabled.

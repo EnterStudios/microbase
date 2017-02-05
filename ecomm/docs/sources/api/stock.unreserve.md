@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token             | yes | Token   | Bearer xxxxx... | Authentication token.
 reserveId         | yes | String  | H1ugxlYO        | The Reserve id.
 unreserveQuantity | yes | Number  | 1               | The quantity to unreserve.
 

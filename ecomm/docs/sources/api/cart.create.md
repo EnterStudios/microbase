@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token      | yes | Token  | Bearer xxxxx... | Authentication token.
 customerId | yes | String | A21afRq1        | The User identifier. Mandatory in the Cart, defaults to 'ANON'.
 currency   | yes | String | USD             | Cart Currency. Mandatory in the Cart, defaults to a config property.
 country    | no  | String | US              | Country to be asociated to the Cart. Defaults to a config property.

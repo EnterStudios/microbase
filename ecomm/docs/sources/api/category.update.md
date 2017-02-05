@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token         | yes | Token  | Bearer xxxxx... | Authentication token.
 id            | no  | String | SJlkcsaQ        | The id of the Category to update.
 
 ## Updatable fields

@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token     | yes | Token  | Bearer xxxxx... | Authentication token.
 id | no  | String | iw3RA1EE        | The id of the Payment Method to remove.
 
 # Response

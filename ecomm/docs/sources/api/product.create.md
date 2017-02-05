@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token           | yes | Token       | Bearer xxxxx... | Authentication token.
 sku             | yes | String      | 001017730838228085 | Unique stock keeping unit identifier.
 status          | yes | String      | DRAFT | Status of the Product [ONLINE, DRAFT]. Only ONLINE Products are indexed and salable. 
 title           | yes | String      | Two sided frigo | Product title to show in the store.

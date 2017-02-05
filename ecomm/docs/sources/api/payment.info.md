@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token     | yes | Token   | Bearer xxxxx... | Authentication token.
 id | yes | String  | ia5RA1W9        | The Payment Method id to get info on.
 
 # Response
