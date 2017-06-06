@@ -148,40 +148,38 @@ module.exports = function (base) {
   function use(operationFullName, op) {
     const operationMethod = routesStyle === 'REST' ? (op.method || 'post').toLowerCase() : 'all';
     const operationUrl = getOperationUrl(serviceBasePath, serviceName, serviceVersion, op.name, op.path);
-    // TODO: database tokens / scope
-    const securityFn = op.public === true ? (req, res, next) => next() : jwt({ secret: jwtSecretKey });
     base.logger.info(`[http] added ${routesStyle} service [${operationFullName}] in [${operationMethod}][${operationUrl}]`);
-    // Add the route, mixing parameters and payload to call the handler
-    router[operationMethod](
-      operationUrl,
-      securityFn,
-      (req, res, next) => {
-
-        // wrap the events from request and response
-        ns.bindEmitter(req);
-        ns.bindEmitter(res);
-        ns.run(function () {
-          const rid = shortid.generate();
-          if (req.headers['x-request-id']) {
-            req.headers['x-request-id'] = req.headers['x-request-id'] + ':' + rid;
-          } else {
-            req.headers['x-request-id'] = rid;
-          }
-          res.set('x-request-id', req.headers['x-request-id']);
-          // Store CID & Authorization token in the local storage
-          ns.set('x-request-id', req.headers['x-request-id']);
-          ns.set('authorization', req.headers['authorization']);
-          // Mix body payload/params/query
-          let payload = req.body || {};
-          Object.assign(payload, req.params);
-          Object.assign(payload, req.query);
-          // Call the handler
-          return op.handler(payload, (response = {}) => {
-            return res.status(response.statusCode || 200).json(response);
-          }, req, res);
-
-        });
+    const opFn = (req, res, next) => {
+      // wrap the events from request and response
+      ns.bindEmitter(req);
+      ns.bindEmitter(res);
+      ns.run(() => {
+        const rid = shortid.generate();
+        if (req.headers['x-request-id']) {
+          req.headers['x-request-id'] = req.headers['x-request-id'] + ':' + rid;
+        } else {
+          req.headers['x-request-id'] = rid;
+        }
+        res.set('x-request-id', req.headers['x-request-id']);
+        // Store CID & Authorization token in the local storage
+        ns.set('x-request-id', req.headers['x-request-id']);
+        ns.set('authorization', req.headers['authorization']);
+        // Mix body payload/params/query
+        const payload = req.body || {};
+        Object.assign(payload, req.params);
+        Object.assign(payload, req.query);
+        // Call the handler
+        return op.handler(payload, (response = {}) => {
+          return res.status(response.statusCode || 200).json(response);
+        }, req, res);
       });
+    };
+    const middlewares = [];
+    if (!op.disableTokenVerification) middlewares.push(jwt({ secret: jwtSecretKey }));
+    if (op.inMiddlewares) middlewares.push(op.inMiddlewares);
+    middlewares.push(opFn);
+    // Add the route, mixing parameters and payload to call the handler
+    router[operationMethod](operationUrl, middlewares);
   }
 
   // Call another services

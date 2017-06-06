@@ -219,7 +219,7 @@ module.exports = function (base) {
   service.addOperation({
     name: 'micro.ping',
     transports: ['http'],
-    public: true,
+    disableTokenVerification: true,
     handler: (msg, reply) => {
       return reply({ answer: 'pong' });
     }
@@ -230,7 +230,7 @@ module.exports = function (base) {
   service.addOperation({
     name: 'micro.hystrix',
     transports: ['http'],
-    public: true,
+    disableTokenVerification: true,
     handler: (msg, reply, req, res) => {
       res.setHeader('Content-Type', 'text/event-stream;charset=UTF-8');
       res.setHeader('Cache-Control', 'no-cache, no-store, max-age=0, must-revalidate');
@@ -244,7 +244,7 @@ module.exports = function (base) {
     service.addOperation({
       name: 'micro.config',
       transports: ['http'],
-      public: true,
+      disableTokenVerification: true,
       handler: (msg, reply) => {
         return reply({ answer: base.config.get() });
       }
