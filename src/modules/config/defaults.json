@@ -39,6 +39,9 @@
   "services": {
     "defaultOperationsFolder": "${servicePath}/operations",
     "defaultOperationsKey": "services:operations",
+    "defaultScopes": [
+      "INTERNAL"
+    ],
     "defaultTransports": [
       "http",
       "amqp"

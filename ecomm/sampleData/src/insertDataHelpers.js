@@ -163,12 +163,25 @@ function helpers(base) {
       });
   }
 
+  function insertOAuthClient(data) {
+    return Promise.all(handleFunctions([], data))
+      .then(() => {
+        return base.services.call({
+          name: 'oauth:oauth.client.create',
+          headers,
+          timeout
+        }, data);
+      });
+  }
+
   return {
     insertTax,
     insertCategory,
     insertProduct,
     insertPromotion,
     insertShipping,
+    insertPayment,
+    insertOAuthClient
   };
 }
 

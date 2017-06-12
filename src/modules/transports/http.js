@@ -6,10 +6,14 @@ const expressWinston = require('express-winston');
 const shortid = require('shortid');
 const cls = require('continuation-local-storage');
 const jwt = require('express-jwt');
+const Guard = require('express-jwt-permissions');
 const Wreck = require('wreck');
 const cors = require('cors');
 
 module.exports = function (base) {
+
+  const guard = Guard({ permissionsProperty: 'scope' });
+  const defaultScopes = base.config.get('services:defaultScopes');
 
   // request storage
   const ns = cls.getNamespace('microbase') || cls.createNamespace('microbase');
@@ -175,8 +179,13 @@ module.exports = function (base) {
       });
     };
     const middlewares = [];
-    if (!op.disableTokenVerification) middlewares.push(jwt({ secret: jwtSecretKey }));
-    if (op.inMiddlewares) middlewares.push(op.inMiddlewares);
+    if (!op.disableTokenVerification) {
+      middlewares.push(jwt({ secret: jwtSecretKey }));
+      middlewares.push(guard.check(op.scopes || defaultScopes));
+    }
+    if (op.inMiddlewares) {
+      middlewares.push(op.inMiddlewares);
+    }
     middlewares.push(opFn);
     // Add the route, mixing parameters and payload to call the handler
     router[operationMethod](operationUrl, middlewares);
@@ -194,8 +203,12 @@ module.exports = function (base) {
     const operationMethod = config.method || 'POST';
 
     return new Promise((resolve, reject) => {
-      const operationUrl = getOperationUrl(getGatewayBaseUrl(serviceName, serviceVersion, operationName) + gatewayBasePath, serviceName, serviceVersion, operationName, config.path);
-      if (base.logger.isDebugEnabled()) base.logger.debug(`[http] calling [${operationMethod}] ${operationUrl} with ${JSON.stringify(msg)}`);
+      const operationUrl =
+        getOperationUrl(getGatewayBaseUrl(serviceName, serviceVersion, operationName) + gatewayBasePath,
+          serviceName, serviceVersion, operationName, config.path);
+      if (base.logger.isDebugEnabled()) {
+        base.logger.debug(`[http] calling [${operationMethod}] ${operationUrl} with ${JSON.stringify(msg)}`);
+      }
       wreck.request(
         operationMethod,
         operationUrl,

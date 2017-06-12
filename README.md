@@ -196,6 +196,7 @@ NODE_ENV=docker node insertData.js Product ./data/dataProductsFridges.json
 NODE_ENV=docker node insertData.js Promotion ./data/dataPromotions.json
 NODE_ENV=docker node insertData.js Shipping ./data/dataShippings.json
 NODE_ENV=docker node insertData.js Payment ./data/dataPayments.json
+NODE_ENV=docker node insertData.js OAuthClient ./data/dataOAuthClients.json
 ```
 
 ## Postman
