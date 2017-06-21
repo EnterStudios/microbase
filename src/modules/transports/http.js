@@ -1,19 +1,17 @@
 const express = require('express');
-//const multer = require('multer');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const shortid = require('shortid');
 const cls = require('continuation-local-storage');
-const jwt = require('express-jwt');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const passport = require('passport');
 const Guard = require('express-jwt-permissions');
 const Wreck = require('wreck');
 const cors = require('cors');
 
 module.exports = function (base) {
-
-  const guard = Guard({ permissionsProperty: 'scope' });
-  const defaultScopes = base.config.get('services:defaultScopes');
 
   // request storage
   const ns = cls.getNamespace('microbase') || cls.createNamespace('microbase');
@@ -47,9 +45,6 @@ module.exports = function (base) {
     getGatewayBaseUrl = () => gatewayBaseUrl;
   }
 
-  // JWT secretKey
-  const jwtSecretKey = base.config.get('token:secretKey');
-
   // Helpers
   const getOperationUrl = (basePath, serviceName, serviceVersion, operationName, operationPath) =>
     `${basePath}/${serviceName}/${serviceVersion}/${operationName}${operationPath !== undefined ? operationPath : ''}`;
@@ -76,8 +71,6 @@ module.exports = function (base) {
 
   app.use(bodyParser.json());                         // for parsing application/json
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-  //app.use(multer());                                  // for parsing multipart/form-data
-  // TODO: cors
 
   // Overwrite the powered-by header
   app.use(function (req, res, next) {
@@ -148,6 +141,24 @@ module.exports = function (base) {
     base.logger.info(`[http] running at ${this.address().address}:${this.address().port}${base.config.get('transports:http:path')}`);
   });
 
+  // Tokens
+  const guard = Guard({ permissionsProperty: 'scope' });
+
+  const tokenSecretKey = base.config.get('token:secretKey');
+  const tokenIss = base.config.get('token:iss');
+
+  passport.use(new JwtStrategy({
+    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    secretOrKey: tokenSecretKey,
+    issuer: tokenIss
+  }, (tokenData, done) => {
+    if (tokenData.sub) {
+      return done(null, { id: tokenData.sub, scope: tokenData.scope });
+    }
+    return done(null, false);
+  }));
+  app.use(passport.initialize());
+
   // Add operation method
   function use(operationFullName, op) {
     const operationMethod = routesStyle === 'REST' ? (op.method || 'post').toLowerCase() : 'all';
@@ -180,8 +191,18 @@ module.exports = function (base) {
     };
     const middlewares = [];
     if (!op.disableTokenVerification) {
-      middlewares.push(jwt({ secret: jwtSecretKey }));
-      middlewares.push(guard.check(op.scopes || defaultScopes));
+      const authenticationMiddleware = (req, res, next) => {
+        passport.authenticate('jwt', function (err, user, info) {
+          if (info) return res.status(401).json({ ok: false, error: 'invalid_token' });
+          req.user = user;
+          return next();
+        })(req, res, next);
+      };
+
+      middlewares.push(authenticationMiddleware);
+      if (op.scope) {
+        middlewares.push(guard.check(op.scope));
+      }
     }
     if (op.inMiddlewares) {
       middlewares.push(op.inMiddlewares);
