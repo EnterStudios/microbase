@@ -61,6 +61,9 @@ module.exports = function (options = {}) {
   // Search service
   base.search = options.search || require('./modules/search')(base);
 
+  // Tokens service
+  base.tokens = options.tokens || require('./modules/tokens')(base);
+
   // Transports
   base.transports = {};
   base.transports.http = (options.transports && options.transports.http)

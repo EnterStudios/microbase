@@ -151,7 +151,7 @@ curl --request POST \
   --url http://localhost:80/services/catalog/v1/category \
   --header 'accept: application/json' \
   --header 'content-type: application/json' \
-  --header 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6InVzZXIiLCJzY29wZSI6ImFwaSIsImp0aSI6ImZmYjVhOTQxLTQwYWMtNDBjNy1iMDNiLWIzZjdiMTdlOGRlMCIsImlhdCI6MTQ2NDYwNzU1MCwiZXhwIjoxNDk2MTQzNTUwfQ.kgFdYAGjwLC7wrY2gcm-8swDzwSCuEwLhgSx10rKZew' \
+  --header 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6ImNsaWVudC9pbnRlcm5hbCIsInNjb3BlIjpbIklOVEVSTkFMIl0sImp0aSI6IjgyM2Y1MjY2LWEzYjEtNDkzNi1hMDk4LTc1Y2EzYzJlMmZmZSIsImlhdCI6MTQ5ODIwNTUwMX0.z3z2U_xTSSkLbB2e6WqV7ipidvGny7x6bZVm-mxMbU4' \
   --data '{"title": "Category 01", "description": "This is the Category 01", "slug": "category01", "parent": "ROOT"}'
 ```
 
@@ -241,7 +241,7 @@ curl --request POST \
   --url http://localhost:80/services/taxes/v1/vat \
   --header 'accept: application/json' \
   --header 'content-type: application/json' \
-  --header 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6InVzZXIiLCJzY29wZSI6ImFwaSIsImp0aSI6ImZmYjVhOTQxLTQwYWMtNDBjNy1iMDNiLWIzZjdiMTdlOGRlMCIsImlhdCI6MTQ2NDYwNzU1MCwiZXhwIjoxNDk2MTQzNTUwfQ.kgFdYAGjwLC7wrY2gcm-8swDzwSCuEwLhgSx10rKZew' \
+  --header 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6ImNsaWVudC9pbnRlcm5hbCIsInNjb3BlIjpbIklOVEVSTkFMIl0sImp0aSI6IjgyM2Y1MjY2LWEzYjEtNDkzNi1hMDk4LTc1Y2EzYzJlMmZmZSIsImlhdCI6MTQ5ODIwNTUwMX0.z3z2U_xTSSkLbB2e6WqV7ipidvGny7x6bZVm-mxMbU4' \
   --data '{"net": "1000"}'
 ```
 

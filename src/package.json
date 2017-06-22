@@ -41,6 +41,7 @@
     "mongoose": "^4.4.16",
     "monq": "^0.3.5",
     "nconf": "^0.8.4",
+    "njwt": "^0.4.0",
     "object-hash": "^1.1.2",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1",

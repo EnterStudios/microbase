@@ -146,9 +146,10 @@ module.exports = function (base) {
 
   const tokenSecretKey = base.config.get('token:secretKey');
   const tokenIss = base.config.get('token:iss');
+  const tokenExtractor = ExtractJwt.fromAuthHeaderWithScheme('Bearer');
 
   passport.use(new JwtStrategy({
-    jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme('Bearer'),
+    jwtFromRequest: tokenExtractor,
     secretOrKey: tokenSecretKey,
     issuer: tokenIss
   }, (tokenData, done) => {
@@ -194,8 +195,14 @@ module.exports = function (base) {
       const authenticationMiddleware = (req, res, next) => {
         passport.authenticate('jwt', function (err, user, info) {
           if (info) return res.status(401).json({ ok: false, error: 'invalid_token' });
-          req.user = user;
-          return next();
+          base.tokens
+            .isRevoked(tokenExtractor(req))
+            .then((isRevoked) => {
+              if (isRevoked) return res.status(401).json({ ok: false, error: 'invalid_token' });
+              req.user = user;
+              return next();
+            })
+            .catch(next);
         })(req, res, next);
       };
 
