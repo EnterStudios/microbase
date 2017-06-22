@@ -35,11 +35,11 @@ module.exports = function (base) {
   const gatewayHost = base.config.get('gateway:host');
   const gatewayPort = base.config.get('gateway:port');
   const gatewayBasePath = base.config.get('gateway:path');
-  const gatewayUrlOverrride = base.config.get('gateway:gatewayUrlOverrride');
+  const gatewayUrlOverride = base.config.get('gateway:gatewayUrlOverride');
   const remoteCallsTimeout = base.config.get('gateway:timeout');
   let getGatewayBaseUrl;
-  if (gatewayUrlOverrride) {
-    getGatewayBaseUrl = base.utils.loadModule('gateway:gatewayUrlOverrride').module;
+  if (gatewayUrlOverride) {
+    getGatewayBaseUrl = base.utils.loadModule('gateway:gatewayUrlOverride').module;
   } else {
     const gatewayBaseUrl = `http://${gatewayHost}:${gatewayPort}`;
     getGatewayBaseUrl = () => gatewayBaseUrl;
