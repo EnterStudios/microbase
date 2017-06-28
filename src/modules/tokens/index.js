@@ -6,6 +6,7 @@ module.exports = (base) => {
   const revokedTokensUri = base.config.get('services:uris:oauth.token.revoked.list');
   const revokedListHeaders = base.config.get('revokedListHeaders');
   const revokedListTimeout = base.config.get('revokedListTimeout');
+  const revokedListActive = base.config.get('revokedListActive');
 
   let tokens;
 
@@ -32,14 +33,16 @@ module.exports = (base) => {
     .create('revokedTokens', { expiresIn: 2147483646 }) // 24 days
     .then((cache) => {
       tokens = cache;
-      loadTokens();
+      if (revokedListActive) loadTokens();
     });
 
   // Reload list on Token change
-  const oauthChannel = base.config.get('bus:channels:oauth:name');
-  base.bus.subscribe(`${oauthChannel}.TOKENREVOKE`, (/* msg */) => {
-    loadTokens();
-  });
+  if (revokedListActive) {
+    const oauthChannel = base.config.get('bus:channels:oauth:name');
+    base.bus.subscribe(`${oauthChannel}.TOKENREVOKE`, (/* msg */) => {
+      loadTokens();
+    });
+  }
 
   return {
     isRevoked: (tokenId) =>
