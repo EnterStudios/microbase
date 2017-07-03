@@ -15,7 +15,9 @@ module.exports = (base) => {
       .call({
         name: revokedTokensUri,
         headers: revokedListHeaders,
-        timeout: revokedListTimeout
+        circuitbreaker: {
+          timeout: revokedListTimeout
+        }
       })
       .then(response => {
         if (!response.ok) throw base.utils.Error('cannot_load_revoked_tokens');

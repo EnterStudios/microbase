@@ -73,7 +73,7 @@
     "host": "gateway",
     "port": "80",
     "path": "/services",
-    "timeout": 5000
+    "timeout": 250
   },
   "auth": {
     "scope": [
