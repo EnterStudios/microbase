@@ -242,8 +242,8 @@ module.exports = function (base) {
         operationUrl,
         {
           payload: JSON.stringify(msg),
-          headers: headers,
-          timeout: config.timeout || remoteCallsTimeout
+          headers,
+          timeout: (config.circuitbreaker || {}).timeout || remoteCallsTimeout
         },
         (error, response) => {
           if (error) return reject(error);
