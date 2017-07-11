@@ -8,6 +8,24 @@ version numbers will follow a [Semver][]-ish `0.y.z` format, where `y`
 is incremented when new features or breaking changes are introduced,
 and `z` is incremented for lesser changes or bug fixes.
 
+## [0.12.0][] (2017-07-11)
+
+* Remove sloppy configuration.
+* Added configurable shutdown timer.
+* Fix circuitbreaker/http timeouts.
+* Added tokens module with revocation utility.
+* Added token scope verification 
+* Added a parameter to deactivate the revoked tokens check.
+* Refactored http handlers to allow middlewares injection.
+* ecomm
+  * Updated docker compose file.
+  * Updated sampleData token.
+  * Updated postman collection.
+  * Updated examples.
+  * Updated docs.
+  * Added payment methods sample data.
+  * Added OAuth clients initial data.
+
 ## [0.11.2][] (2017-01-19)
 
 * Fix datadog agent.
