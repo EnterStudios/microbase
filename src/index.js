@@ -61,6 +61,9 @@ module.exports = function (options = {}) {
   // Search service
   base.search = options.search || require('./modules/search')(base);
 
+  // Tokens service
+  base.tokens = options.tokens || require('./modules/tokens')(base);
+
   // Transports
   base.transports = {};
   base.transports.http = (options.transports && options.transports.http)
@@ -80,12 +83,11 @@ module.exports = function (options = {}) {
       base.logger.info('[main] Closed out remaining connections.');
       process.exit();
     });
-
     // if after
     setTimeout(function () {
       base.logger.warn('[main] Could not close connections in time, forcefully shutting down.');
       process.exit();
-    }, 10 * 1000);
+    }, base.config.get('transports:http:shutdownTimer') * 1000);
   };
 
   // listen for TERM signal .e.g. kill

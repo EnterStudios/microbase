@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token           | yes | Token  | Bearer xxxxx... | Authentication token.
 title           | yes | String | Category with classifications 01 | Category title to show in the store.
 description     | no  | String | This is the Category with classifications 01 | Category description.
 slug            | yes | String | categorywithclass01 | String to be used in the url. Parent+slug must be unique.

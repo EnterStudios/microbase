@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token           | yes | Token  | Bearer xxxxx...    | Authentication token.
 id              | no  | String List | HJ4g4fACrH         | Comma separated Products ids list.
 sku             | no  | String List | A00123321,A8778122 | Comma separated skus list.
 title           | no  | String      | shoe               | Title /${title}/i regex expression.

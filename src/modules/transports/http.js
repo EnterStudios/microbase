@@ -1,11 +1,13 @@
 const express = require('express');
-//const multer = require('multer');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 const shortid = require('shortid');
 const cls = require('continuation-local-storage');
-const jwt = require('express-jwt');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
+const passport = require('passport');
+const Guard = require('express-jwt-permissions');
 const Wreck = require('wreck');
 const cors = require('cors');
 
@@ -33,18 +35,15 @@ module.exports = function (base) {
   const gatewayHost = base.config.get('gateway:host');
   const gatewayPort = base.config.get('gateway:port');
   const gatewayBasePath = base.config.get('gateway:path');
-  const gatewayUrlOverrride = base.config.get('gateway:gatewayUrlOverrride');
+  const gatewayUrlOverride = base.config.get('gateway:gatewayUrlOverride');
   const remoteCallsTimeout = base.config.get('gateway:timeout');
   let getGatewayBaseUrl;
-  if (gatewayUrlOverrride) {
-    getGatewayBaseUrl = base.utils.loadModule('gateway:gatewayUrlOverrride').module;
+  if (gatewayUrlOverride) {
+    getGatewayBaseUrl = base.utils.loadModule('gateway:gatewayUrlOverride').module;
   } else {
     const gatewayBaseUrl = `http://${gatewayHost}:${gatewayPort}`;
     getGatewayBaseUrl = () => gatewayBaseUrl;
   }
-
-  // JWT secretKey
-  const jwtSecretKey = base.config.get('token:secretKey');
 
   // Helpers
   const getOperationUrl = (basePath, serviceName, serviceVersion, operationName, operationPath) =>
@@ -72,8 +71,6 @@ module.exports = function (base) {
 
   app.use(bodyParser.json());                         // for parsing application/json
   app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-  //app.use(multer());                                  // for parsing multipart/form-data
-  // TODO: cors
 
   // Overwrite the powered-by header
   app.use(function (req, res, next) {
@@ -144,44 +141,82 @@ module.exports = function (base) {
     base.logger.info(`[http] running at ${this.address().address}:${this.address().port}${base.config.get('transports:http:path')}`);
   });
 
+  // Tokens
+  const guard = Guard({ permissionsProperty: 'scope' });
+
+  const tokenSecretKey = base.config.get('token:secretKey');
+  const tokenIss = base.config.get('token:iss');
+  const tokenExtractor = ExtractJwt.fromAuthHeaderWithScheme('Bearer');
+
+  passport.use(new JwtStrategy({
+    jwtFromRequest: tokenExtractor,
+    secretOrKey: tokenSecretKey,
+    issuer: tokenIss
+  }, (tokenData, done) => {
+    if (tokenData.sub) {
+      return done(null, { id: tokenData.sub, scope: tokenData.scope });
+    }
+    return done(null, false);
+  }));
+  app.use(passport.initialize());
+
   // Add operation method
   function use(operationFullName, op) {
     const operationMethod = routesStyle === 'REST' ? (op.method || 'post').toLowerCase() : 'all';
     const operationUrl = getOperationUrl(serviceBasePath, serviceName, serviceVersion, op.name, op.path);
-    // TODO: database tokens / scope
-    const securityFn = op.public === true ? (req, res, next) => next() : jwt({ secret: jwtSecretKey });
     base.logger.info(`[http] added ${routesStyle} service [${operationFullName}] in [${operationMethod}][${operationUrl}]`);
-    // Add the route, mixing parameters and payload to call the handler
-    router[operationMethod](
-      operationUrl,
-      securityFn,
-      (req, res, next) => {
-
-        // wrap the events from request and response
-        ns.bindEmitter(req);
-        ns.bindEmitter(res);
-        ns.run(function () {
-          const rid = shortid.generate();
-          if (req.headers['x-request-id']) {
-            req.headers['x-request-id'] = req.headers['x-request-id'] + ':' + rid;
-          } else {
-            req.headers['x-request-id'] = rid;
-          }
-          res.set('x-request-id', req.headers['x-request-id']);
-          // Store CID & Authorization token in the local storage
-          ns.set('x-request-id', req.headers['x-request-id']);
-          ns.set('authorization', req.headers['authorization']);
-          // Mix body payload/params/query
-          let payload = req.body || {};
-          Object.assign(payload, req.params);
-          Object.assign(payload, req.query);
-          // Call the handler
-          return op.handler(payload, (response) => {
-            return res.status(response.statusCode || 200).json(response);
-          }, req, res);
-
-        });
+    const opFn = (req, res, next) => {
+      // wrap the events from request and response
+      ns.bindEmitter(req);
+      ns.bindEmitter(res);
+      ns.run(() => {
+        const rid = shortid.generate();
+        if (req.headers['x-request-id']) {
+          req.headers['x-request-id'] = req.headers['x-request-id'] + ':' + rid;
+        } else {
+          req.headers['x-request-id'] = rid;
+        }
+        res.set('x-request-id', req.headers['x-request-id']);
+        // Store CID & Authorization token in the local storage
+        ns.set('x-request-id', req.headers['x-request-id']);
+        ns.set('authorization', req.headers['authorization']);
+        // Mix body payload/params/query
+        const payload = req.body || {};
+        Object.assign(payload, req.params);
+        Object.assign(payload, req.query);
+        // Call the handler
+        return op.handler(payload, (response = {}) => {
+          return res.status(response.statusCode || 200).json(response);
+        }, req, res);
       });
+    };
+    const middlewares = [];
+    if (!op.disableTokenVerification) {
+      const authenticationMiddleware = (req, res, next) => {
+        passport.authenticate('jwt', function (err, user, info) {
+          if (info) return res.status(401).json({ ok: false, error: 'invalid_token' });
+          base.tokens
+            .isRevoked(tokenExtractor(req))
+            .then((isRevoked) => {
+              if (isRevoked) return res.status(401).json({ ok: false, error: 'invalid_token' });
+              req.user = user;
+              return next();
+            })
+            .catch(next);
+        })(req, res, next);
+      };
+
+      middlewares.push(authenticationMiddleware);
+      if (op.scope) {
+        middlewares.push(guard.check(op.scope));
+      }
+    }
+    if (op.inMiddlewares) {
+      middlewares.push(op.inMiddlewares);
+    }
+    middlewares.push(opFn);
+    // Add the route, mixing parameters and payload to call the handler
+    router[operationMethod](operationUrl, middlewares);
   }
 
   // Call another services
@@ -196,15 +231,19 @@ module.exports = function (base) {
     const operationMethod = config.method || 'POST';
 
     return new Promise((resolve, reject) => {
-      const operationUrl = getOperationUrl(getGatewayBaseUrl(serviceName, serviceVersion, operationName) + gatewayBasePath, serviceName, serviceVersion, operationName, config.path);
-      if (base.logger.isDebugEnabled()) base.logger.debug(`[http] calling [${operationMethod}] ${operationUrl} with ${JSON.stringify(msg)}`);
+      const operationUrl =
+        getOperationUrl(getGatewayBaseUrl(serviceName, serviceVersion, operationName) + gatewayBasePath,
+          serviceName, serviceVersion, operationName, config.path);
+      if (base.logger.isDebugEnabled()) {
+        base.logger.debug(`[http] calling [${operationMethod}] ${operationUrl} with ${JSON.stringify(msg)}`);
+      }
       wreck.request(
         operationMethod,
         operationUrl,
         {
           payload: JSON.stringify(msg),
-          headers: headers,
-          timeout: config.timeout || remoteCallsTimeout
+          headers,
+          timeout: (config.circuitbreaker || {}).timeout || remoteCallsTimeout
         },
         (error, response) => {
           if (error) return reject(error);

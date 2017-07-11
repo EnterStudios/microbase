@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token                  | no  | Token        | Bearer xxxxx...      | Authentication token.
 id                     | no  | String List  | r1h2uQ4rx            | Customer identifier.
 email                  | no  | String List  | john.doe@gmail.com   | Customer email.
 status                 | no  | String List  | ACTIVE               | Status of the customer. ACTIVE or INACTIVE.

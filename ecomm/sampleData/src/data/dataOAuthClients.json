@@ -1,0 +1,1 @@
+{ "clientId" : "internal", "clientSecret" : "$2a$12$SOFKi8QtLbpARyEJy5kBtuiNTu1c.BObkdjOPzQOpT4yNgcon0H8K", "scope" : ["INTERNAL"], "redirectUris" : [], "authorizedGrantTypes" : ["client_credentials"],  "accessTokenValiditySeconds" : 0 }

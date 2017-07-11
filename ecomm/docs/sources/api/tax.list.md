@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token        | yes  | Token        | Bearer xxxxx... | Authentication token.
 id           | yes  | String List  | rJGOMDf         | Tax database identifier.
 code         | no   | String List  | default         | Code to be used as a reference in the Product.
 class        | no   | String List  | default         | Identifier to the implementation code (i.e.: default.js).

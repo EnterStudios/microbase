@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token  | yes | Token       | Bearer xxxxx... | Authentication token.
 cartId | yes | String      | H19PRsec        | The id of the Cart to add entries.
 items  | yes | Object List | -               | The list of entries to add to the Cart.
 

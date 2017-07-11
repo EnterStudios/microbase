@@ -1,0 +1,2 @@
+{"title" : "Credit Card", "active" : true, "gateway" : "stripe"}
+{"title" : "Paypal", "active" : true, "gateway" : "paypal"}

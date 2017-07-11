@@ -38,8 +38,6 @@ ecosystem.
 
 # Entities
 
-The Cart entity holds the Product inventory.
-
 ## Cart
 
 Field | Description| Type | Required | Default

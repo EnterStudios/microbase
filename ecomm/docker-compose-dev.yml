@@ -1,29 +1,189 @@
-version: '2'
-
-services:
-
-  mongo:
-    image: mongo:3
-    ports:
-      - 27017:27017
-    volumes:
-      - ./dockerConf/mongo/data:/data/db
-
-  bus:
-    image: rabbitmq:3-management
-    ports:
-      - 15672:15672
-      - 5672:5672
-
-  elasticsearch:
-    image: elasticsearch:2
-    ports:
-      - 9200:9200
-      - 9300:9300
-    volumes:
-      - ./dockerConf/elasticsearch/data:/usr/share/elasticsearch/data
-
-  redis:
-    image: redis:3
-    ports:
-      - 6379:6379
+bus:
+  image: 'rabbitmq:3-management'
+  ports:
+    - '15672:15672'
+  restart: always
+oauth-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-oauth-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+cart-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-cart-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+catalog-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-catalog-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+consul:
+  command: agent -server -bootstrap-expect 1 -client 0.0.0.0 -ui
+  environment:
+    - CONSUL_BIND_INTERFACE=ethwe1
+    - CONSUL_CLIENT_INTERFACE=ethwe1
+  image: 'consul:latest'
+  mem_limit: 64m
+  ports:
+    - '8500:8500'
+  restart: always
+customer-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-customer-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+datadog:
+  deployment_strategy: every_node
+  environment:
+    - API_KEY=xxxx
+    - DD_HOSTNAME=$DOCKERCLOUD_NODE_HOSTNAME
+    - LOG_LEVEL=DEBUG
+  image: 'datadog/docker-dd-agent:latest-alpine'
+  privileged: true
+  restart: on-failure
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock:ro'
+    - '/proc:/host/proc:ro'
+    - '/sys/fs/cgroup:/host/sys/fs/cgroup:ro'
+gateway:
+  autoredeploy: true
+  environment:
+    - UPSTREAMUSEIP=true
+  image: 'ncornag/micro-docker-nginx:latest'
+  mem_limit: 64m
+  ports:
+    - '80:80'
+  restart: always
+logspout:
+  entrypoint: '/bin/logspout syslog://logs5.papertrailapp.com:port'
+  image: 'gliderlabs/logspout:latest'
+  mem_limit: 64m
+  restart: always
+  volumes:
+    - '/var/run/docker.sock:/var/run/docker.sock'
+mongo:
+  image: 'mongo:3'
+  mem_limit: 64m
+  ports:
+    - '27017:27017'
+  restart: always
+  volumes:
+    - '/micro/data/db:/data/db'
+    - '/micro/data/configdb:/data/configdb'
+promotion-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-promotion-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+recommendation-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-recommendation-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+stock-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-stock-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true
+tax-service:
+  autoredeploy: true
+  environment:
+    - transports_http_monitors_datadog_enabledBeforeRoutes=true
+    - 'transports_http_monitors_datadog_url=https://datadog:port'
+    - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
+    - transports_http_monitors_sentry_enabledBeforeRoutes=true
+    - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
+  image: 'ncornag/micro-tax-service:develop'
+  links:
+    - bus
+    - datadog
+    - gateway
+    - mongo
+  mem_limit: 128m
+  restart: always
+  sequential_deployment: true

@@ -19,6 +19,7 @@
       "cors": {
         "origin": "*"
       },
+      "shutdownTimer": 10,
       "monitors": {
         "datadog": {
           "enabledBeforeRoutes": false,
@@ -35,6 +36,19 @@
       "url": "amqp://bus"
     }
   },
+  "bus": {
+    "engines": {
+      "local": {
+        "handler": "./local"
+      }
+    },
+    "channels": {
+      "oauth": {
+        "name": "OAUTH",
+        "engine": "local"
+      }
+    }
+  },
   "services": {
     "defaultOperationsFolder": "${servicePath}/operations",
     "defaultOperationsKey": "services:operations",
@@ -49,13 +63,17 @@
     },
     "defaultOutTransport": "http",
     "outMiddlewares": {
+    },
+    "uris": {
+      "customer.checkCredentials": "customer:customer.checkCredentials",
+      "oauth.token.revoked.list": "oauth:v2:oauth.token.revoked.list"
     }
   },
   "gateway": {
     "host": "gateway",
     "port": "80",
     "path": "/services",
-    "timeout": 5000
+    "timeout": 250
   },
   "auth": {
     "scope": [
@@ -67,5 +85,10 @@
   },
   "cache": {
     "implementation": "./memoryCache"
+  },
+  "revokedListActive": true,
+  "revokedListTimeout": 1000,
+  "revokedListHeaders": {
+    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6ImNsaWVudC9pbnRlcm5hbCIsInNjb3BlIjpbIklOVEVSTkFMIl0sImp0aSI6IjgyM2Y1MjY2LWEzYjEtNDkzNi1hMDk4LTc1Y2EzYzJlMmZmZSIsImlhdCI6MTQ5ODIwNTUwMX0.z3z2U_xTSSkLbB2e6WqV7ipidvGny7x6bZVm-mxMbU4"
   }
 }

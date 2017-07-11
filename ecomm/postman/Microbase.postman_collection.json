@@ -1,0 +1,2035 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Microbase",
+		"_postman_id": "7c136921-cdb0-2537-e17c-06d9d6b7bcf9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Elasticsearch",
+			"description": "",
+			"item": [
+				{
+					"name": "products:search",
+					"request": {
+						"url": "http://localhost:9200/products/product/_search?q=*",
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products:mapping",
+					"request": {
+						"url": "http://localhost:9200/products/product/_mapping",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "generic:indices",
+					"request": {
+						"url": "http://localhost:9200/_cat/indices?v",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"size\" : 0,\n    \"aggs\" : { \n        \"brand\" : { \n            \"terms\" : { \n              \"field\" : \"brand\"\n            }\n        },\n        \"colors\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.color\"\n            }\n        },\n        \"energy\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.energy\"\n            }\n        },\n        \"height\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.height\"\n            }\n        },\n        \"width\" : { \n            \"terms\" : { \n              \"field\" : \"classifications.width\"\n            }\n        }\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "products:removeindex",
+					"request": {
+						"url": "http://localhost:9200/products",
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Examples",
+			"description": "",
+			"item": [
+				{
+					"name": "math:ping",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Pong answer\"] = jsonData.answer === \"pong\";"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostExamplesMath}}/services/math/v1/ping",
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\nop:'ping'\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "math:multiply",
+					"request": {
+						"url": "http://{{hostExamplesMath}}/services/math/v1/multiply",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"left\": 100,\n  \"right\": 0.21\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "taxes:vat",
+					"request": {
+						"url": "http://{{hostExamplesTaxes}}/services/taxes/v1/vat",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21pY3JvYmFzZS5pbyIsInN1YiI6ImNsaWVudC9pbnRlcm5hbCIsInNjb3BlIjpbIklOVEVSTkFMIl0sImp0aSI6IjgyM2Y1MjY2LWEzYjEtNDkzNi1hMDk4LTc1Y2EzYzJlMmZmZSIsImlhdCI6MTQ5ODIwNTUwMX0.z3z2U_xTSSkLbB2e6WqV7ipidvGny7x6bZVm-mxMbU4",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"net\": \"1000\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "oauth:token-generation",
+					"request": {
+						"url": "http://{{hostOauth}}/services/oauth/v2/token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic dXNlcjpwYXNz",
+								"description": ""
+							},
+							{
+								"key": "AuthorizationBackup",
+								"value": "Basic user:pass",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text",
+									"enabled": true
+								},
+								{
+									"key": "scope",
+									"value": "api",
+									"type": "text",
+									"enabled": true
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stripe",
+			"description": "",
+			"item": [
+				{
+					"name": "Create Token",
+					"request": {
+						"url": "https://api.stripe.com/v1/tokens",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{STRIPE_TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"disabled": false,
+									"key": "card[number]",
+									"value": "4242424242424242",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "card[exp_month]",
+									"value": "12",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "card[exp_year]",
+									"value": "2018",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "card[cvc]",
+									"value": "123",
+									"enabled": true,
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create Charge",
+					"request": {
+						"url": "https://api.stripe.com/v1/charges",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{STRIPE_TOKEN}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"disabled": false,
+									"key": "amount",
+									"value": "200",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "currency",
+									"value": "eur",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "source",
+									"value": "tok_19fuUADDqI9GKOIfvjzqm5MV",
+									"enabled": true,
+									"type": "text"
+								},
+								{
+									"disabled": false,
+									"key": "description",
+									"value": "My first charge",
+									"enabled": true,
+									"type": "text"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart-cart",
+			"description": "",
+			"item": [
+				{
+					"name": "cart.info",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.info?cartId=H19PRsec",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cartId\": \"HkwKLxjG\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.addToCart",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.addToCart?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"items\" :[\n        {\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 3,\n            \"warehouseId\": \"001\"\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.addToCart (bulk)",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.addToCart?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"items\" :[\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        },\n        {\n            \"productId\": \"SJ64fAAHH\",\n            \"quantity\": 1,\n            \"warehouseId\": \"001\"\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.removeFromCart",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.removeFromCart",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cartId\": \"H19PRsec\",\n    \"itemId\": \"HytaSIc1e\",\n    \"quantity\": 2\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.calculateCart",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.calculateCart?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.checkout",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.checkout?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"shippingAddress\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"address_1\": \"1650 Bolman Court\",\n\t    \"postCode\": \"61701\",\n\t    \"city\": \"Valencia\",\n\t    \"state\": \"Essex\",\n\t    \"country\": \"GB\",\n\t    \"company\": \"MyCompany\",\n\t    \"phone\": 2173203531,\n\t    \"instructions\": \"Instructions\"\n  \t},\n  \t\"shippingMethod\": \"SJi0oca4e\",\n  \t\"billingAddress\": \"SAMEASSHIPPING\",\n  \t\"paymentId\": \"BJgnZdVJ_g\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.setShippingAddress",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.setShippingAddress?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"shippingAddress\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"address_1\": \"1650 Bolman Court\",\n\t    \"postCode\": \"61701\",\n\t    \"city\": \"Valencia\",\n\t    \"state\": \"Piemonte\",\n\t    \"country\": \"IT\",\n\t    \"company\": \"MyCompany\",\n\t    \"phone\": 2173203531,\n\t    \"instructions\": \"Instructions\"\n  \t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.setShippingMethod",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.setShippingMethod?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"methodId\": \"SJi0oca4e\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.setBillingAddress",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.setBillingAddress?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"billingAddress\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"address_1\": \"1650 Bolman Court\",\n\t    \"postCode\": \"61701\",\n\t    \"city\": \"Valencia\",\n\t    \"state\": \" Valencia\",\n\t    \"country\": \"ES\",\n\t    \"company\": \"MyCompany\",\n\t    \"phone\": 2173203531,\n\t    \"instructions\": \"Instructions\"\n  \t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.setBillingAddress (same as billing)",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.setBillingAddress?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"billingAddress\": \"SAMEASSHIPPING\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.setPaymentGateway",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.setPaymentGateway?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"paymentId\": \"BJgnZdVJ_g\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "cart.create (anon)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_cartId\", data.cart.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/cart.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart-shipping",
+			"description": "",
+			"item": [
+				{
+					"name": "shipping.info",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/shipping.info?id=SJi0oca4e",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "shipping.remove",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/shipping.remove?id=SJi0oca4e",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "shipping.getShippingMethods",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/shipping.getShippingMethods",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"address\": {\n\t    \"firstName\": \"John\",\n\t    \"lastName\": \"Doe\",\n\t    \"address_1\": \"1650 Bolman Court\",\n\t    \"postCode\": \"61701\",\n\t    \"city\": \"Valencia\",\n\t    \"state\": \"Piemonte\",\n\t    \"country\": \"IT\",\n\t    \"company\": \"Thinkwrap\",\n\t    \"phone\": 2173203531,\n\t    \"instructions\": \"Instructions\"\n  \t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "shipping.create",
+					"request": {
+						"url": "http://{{hostCart}}/services/cart/v1/shipping.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"UPS Same Day\",\n    \"active\" : true,\n    \"taxCode\" : \"default\",\n    \"rates\" : [\n      {\n        \"locations\" : [\n          { \"country\" : \"GB\" },\n          { \"country\" : \"IT\" },\n          { \"country\" : \"GB\" }\n        ],\n        \"rates\": [\n          {\"currency\" : \"EUR\", \"amount\" : 10.10},\n          {\"currency\" : \"GBP\", \"amount\" : 9.90}\n        ]\n      },\n      {\n        \"locations\" : [\n          { \"country\" : \"US\", \"state\" : \"Hawaii\" },\n          { \"country\" : \"US\", \"state\" : \"Alaska\" }\n        ],\n        \"rates\" : [\n          {\"currency\" : \"USD\", \"amount\" : 25.00}\n        ]\n      }\n    ]\n  }"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "catalog-categories",
+			"description": "",
+			"item": [
+				{
+					"name": "category.create (with classification)",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Category with classifications 01\",\n    \"description\": \"This is the Category with classifications 01\",\n    \"slug\": \"categorywithclass01\",\n    \"parent\": \"ROOT\",\n    \"classifications\": [\n        {\"id\": \"size\", \"description\": \"Size\", \"type\": \"NUMBER\", \"mandatory\": true},\n        {\"id\": \"tech\", \"description\": \"Technology\", \"type\": \"STRING\", \"mandatory\": true}\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "category.info",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.info?id=ROOT",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "category.info (with Childrens)",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.info?id=ROOT&withChildren=true&recursive=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "category.list",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.list?title=frigo",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "category.update",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.update?id=B1bQbuRP",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Category 03 title modified\",\n    \"parent\": \"ROOT\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "catgegory.remove",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.remove?id=By-4rrmsN",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "category.create",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/category.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Category 01\",\n    \"description\": \"This is the Category 01\",\n    \"slug\": \"category01\",\n    \"parent\": \"ROOT\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "catalog-products",
+			"description": "",
+			"item": [
+				{
+					"name": "product.create (with classifications)",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"1001\",\n    \"status\": \"DRAFT\",\n    \"title\": \"Gel Noosa Tri 11\",\n    \"brand\": \"ASics\",\n    \"description\": \"Gel Noosa Tri 11 sports shoes\",\n    \"categories\": [\"B1-Zr45Br\"],\n    \"price\": 119.00,\n    \"salePrice\": 99,\n    \"medias\": [\n        {\"id\": \"100x100\", \"url\": \"http://placehold.it/100x100\"},\n        {\"id\": \"350x150\", \"url\": \"http://placehold.it/350x150\"}\n    ],\n    \"classifications\": [\n        {\"id\": \"color\", \"value\": \"black\"},\n        {\"id\": \"genre\", \"value\": \"male\"},\n        {\"id\": \"footprint\", \"value\": \"normal\"}\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product.create (with modifiers)",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"2001\",\n    \"status\": \"ONLINE\",\n    \"title\": \"Zapato\",\n    \"description\": \"Zapato, que eres un zapato\",\n    \"categories\": [\"ROOT\"],\n    \"price\": 299.00,\n    \"salePrice\": 199,\n    \"medias\": [\n        {\"id\": \"100x100\", \"url\": \"http://placehold.it/100x100\"},\n        {\"id\": \"350x150\", \"url\": \"http://placehold.it/350x150\"}\n    ],\n    \"modifiers\": [\"size\", \"color\"]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product.create (as variant)",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"2004\",\n    \"status\": \"ONLINE\",\n    \"title\": \"Zapato Verde 39\",\n    \"categories\": [\"ROOT\"],\n    \"price\": 110.00,\n    \"salePrice\": 110.00,\n    \"medias\": [\n        {\"id\": \"100x100\", \"url\": \"http://placehold.it/100x100\"},\n        {\"id\": \"350x150\", \"url\": \"http://placehold.it/350x150\"}\n    ],\n    \"base\": \"HkKeao6E\",\n    \"variations\": [\n      {\"id\": \"color\", \"value\": \"Verde\"},\n      {\"id\": \"size\", \"value\": \"39\"}\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product.info",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.info?id=Hyl7TvRLVe&customerId=627939",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							},
+							{
+								"key": "Cache-Control",
+								"value": "no-store1",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product:list",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.list?categories=B1-Zr45Br",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product:update",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.update?id=Skrg4fR0HS",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Zapatillas de running de hombre Gel Noosa Tri 11 Asics\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product:remove",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.remove?id=SywEhdVV",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "product.create",
+					"request": {
+						"url": "http://{{hostCatalog}}/services/catalog/v1/product.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"1001\",\n    \"status\": \"DRAFT\",\n    \"title\": \"Product 004 title\",\n    \"description\": \"Product 004 description\",\n    \"categories\": [\"ROOT\"],\n\t\"prices\": [\n\t\t{\n\t\t\t\"amount\": 99.99,\n\t\t\t\"currency\": \"EUR\",\n\t\t\t\"country\": \"ES\",\n\t\t\t\"validFrom\": \"2016-01-01T00:00:00+0000\",\n\t\t\t\"validUntil\": \"2017-12-31T23:59:59+0000\"\n\t\t}\n\t],\n    \"medias\": [\n        {\"id\": \"100x100\", \"url\": \"http://placehold.it/100x100\"},\n        {\"id\": \"350x150\", \"url\": \"http://placehold.it/350x150\"}\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payments-payments",
+			"description": "",
+			"item": [
+				{
+					"name": "payment.autorize",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_paymentAuthorization\", data.data.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.authorize",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"gateway\": \"stripe\",\n\t\"params\": {\n\t\t\"source\": \"{{_paymentToken}}\",\n\t    \"amount\": 10000,\n\t\t\"currency\":\"EUR\"\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.capture",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_paymentCharge\", data.data.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.capture",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"gateway\": \"stripe\",\n\t\"params\": \"{{_paymentAuthorization}}\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.purchase",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_paymentCharge\", data.data.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.purchase",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"gateway\": \"stripe\",\n\t\"params\": {\n\t\t\"source\": \"{{_paymentToken}}\",\n\t    \"amount\": 10000,\n\t\t\"currency\":\"EUR\"\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.create",
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\" : \"Credit Card\",\n    \"active\" : true,\n    \"gateway\" : \"stripe\"\n  }"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.info",
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.info?id=BJgnZdVJ_g",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.list",
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.list?active=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.remove",
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.remove?id=Hylj_D4Jux",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.update",
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.update?id=BJgnZdVJ_g",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"active\": true\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "payment.token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var data = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"_paymentToken\", data.data.id)"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://{{hostPayment}}/services/payment/v1/payment.token",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"gateway\": \"stripe\",\n\t\"params\": {\n\t\t\"card\":{\n\t\t    \"number\": \"4242424242424242\",\n\t\t    \"exp_month\":\"12\",\n\t\t    \"exp_year\":\"2018\",\n\t\t    \"cvc\":\"123\"\n\t\t}\n\t}\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "promotion-promotion",
+			"description": "",
+			"item": [
+				{
+					"name": "promotion.cartPromotions",
+					"request": {
+						"url": "http://{{hostPromotion}}/services/promotion/v1/promotion.cartPromotions?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"items\" :[\n        {\n        \t\"id\": \"1\",\n            \"productId\": \"SksexGRPn4\",\n            \"quantity\": 2,\n            \"price\": 10.00\n        },\n        {\n        \t\"id\": \"2\",\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 2,\n            \"price\": 20.00\n        },\n        {\n        \t\"id\": \"3\",\n            \"productId\": \"BycbkfRDhV\",\n            \"quantity\": 3,\n            \"price\": 30.00\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "promotion.create",
+					"request": {
+						"url": "http://{{hostPromotion}}/services/promotion/v1/promotion.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"title\" : \"Promotion 02\", \n    \"class\" : \"3x2\", \n    \"restrictions\" : {\n        \"period\" : {\n            \"from\" : \"2016-09-21T14:00:00.000+0000\", \n            \"until\" : \"2016-09-21T16:00:00.000+0000\"\n        }\n    }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "recommendation-recommendation",
+			"description": "",
+			"item": [
+				{
+					"name": "recommendation.alsoviewed",
+					"request": {
+						"url": "http://{{hostRecommendation}}/services/recommendation/v1/recommendation.alsoviewed?productId=Skrg4fR0HS",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"items\" :[\n        {\n        \t\"id\": \"1\",\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 0,\n            \"price\": 100\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stock-stock",
+			"description": "",
+			"item": [
+				{
+					"name": "stock.info",
+					"request": {
+						"url": "http://{{hostStock}}/services/stock/v1/stock.info?productId=HJ4g4fACrH&warehouseId=001",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"warehouseId\": \"003\",\n  \"quantityInStock\": 200,\n  \"quantityReserved\": 0\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "stock.update",
+					"request": {
+						"url": "http://{{hostStock}}/services/stock/v1/stock.update",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": \"HJ4g4fACrH\",\n  \"warehouseId\": \"001\",\n  \"quantityInStock\": 200,\n  \"quantityReserved\": 0\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "stock.reserve",
+					"request": {
+						"url": "http://{{hostStock}}/services/stock/v1/stock.reserve",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": \"HJ4g4fACrH\",\n  \"warehouseId\": \"001\",\n  \"quantity\": 1,\n  \"reserveStockForMinutes\": 1440\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "stock.unreserve",
+					"request": {
+						"url": "http://{{hostStock}}/services/stock/v1/stock.unreserve",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reserveId\": \"rJIzFlFd\",\n  \"unreserveQuantity\": 1\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "stock.create",
+					"request": {
+						"url": "http://{{hostStock}}/services/stock/v1/stock.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"productId\": \"0001\",\n  \"warehouseId\": \"002\",\n  \"quantityInStock\": 10000,\n  \"quantityReserved\": 0\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tax-tax",
+			"description": "",
+			"item": [
+				{
+					"name": "tax.info",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.info?id=rkMNt1Er",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "tax.list",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.list?active=true",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "tax.remove",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.remove?id=Hylj_D4Jux",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "tax.update",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.update?id=BJgnZdVJ_g",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"active\": false\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "tax.cartTaxes",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.cartTaxes?cartId=H19PRsec",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"items\" :[\n        {\n        \t\"id\": \"1\",\n            \"productId\": \"By2ZWfAPnV\",\n            \"quantity\": 0,\n            \"price\": 100\n        }\n    ]\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "tax.create",
+					"request": {
+						"url": "http://{{hostTax}}/services/tax/v1/tax.create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"default1\",\n    \"class\": \"default\",\n    \"title\": \"IVA 21%\",\n    \"rate\": 21,\n    \"isPercentage\": true\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

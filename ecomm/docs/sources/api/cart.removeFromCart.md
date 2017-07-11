@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token    | yes | Token  | Bearer xxxxx... | Authentication token.
 cartId   | yes | String | H19PRsec        | The id of the Cart.
 itemId   | yes | String | HyR1hMmc        | The id of the item to remove.
 quantity | yes | Number | 1               | The quantity of product to remove from the Cart.

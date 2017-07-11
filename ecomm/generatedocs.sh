@@ -15,6 +15,7 @@ cp $DEST/micro-customer-service/README.md docs/sources/micro-customer-service.md
 cp $DEST/micro-stock-service/README.md docs/sources/micro-stock-service.md
 cp $DEST/micro-cart-service/README.md docs/sources/micro-cart-service.md
 cp $DEST/micro-tax-service/README.md docs/sources/micro-tax-service.md
+cp $DEST/micro-payment-service/README.md docs/sources/micro-payment-service.md
 cp $DEST/micro-promotion-service/README.md docs/sources/micro-promotion-service.md
 cp $DEST/micro-promotion-service/Examples.md docs/sources/Examples.md
 cp $DEST/micro-recommendation-service/README.md docs/sources/micro-recommendation-service.md
@@ -25,6 +26,7 @@ cp -R $DEST/micro-customer-service/src/docs/api docs/sources
 cp -R $DEST/micro-stock-service/src/docs/api docs/sources
 cp -R $DEST/micro-cart-service/src/docs/api docs/sources
 cp -R $DEST/micro-tax-service/src/docs/api docs/sources
+cp -R $DEST/micro-payment-service/src/docs/api docs/sources
 cp -R $DEST/micro-promotion-service/src/docs/api docs/sources
 cp -R $DEST/micro-recommendation-service/src/docs/api docs/sources
 cp -R $DEST/micro-oauth-service/src/docs/api docs/sources

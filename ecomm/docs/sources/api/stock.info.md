@@ -9,7 +9,6 @@ follows the [MicroBase API calling conventions](../calling-conventions.html).
 
 Argument | Required | Type | Example | Description
 ---------|----------|------|---------|------------
-token       | yes | Token   | Bearer xxxxx... | Authentication token.
 productId   | yes | String  | HJ4g4fACrH      | The Product id to get info on.
 warehouseId | yes | String  | 001             | The Warehouse id to get info on.
 

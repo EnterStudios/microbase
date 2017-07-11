@@ -1,20 +1,19 @@
 const Ajv = require('ajv');
 
-module.exports = function (base) {
+module.exports = (base) => {
   return {
-    handler: function (options) {
+    handler: (options) => {
       const ajv = new Ajv();
       const validate = ajv.compile(options.schema);
-      return function (params, reply, request, next) {
+      return (params, reply, request, next) => {
         if (!validate(params)) {
           return reply(base.utils.genericResponse(null, {
             name: 'ValidationError',
             errors: validate.errors
           }));
         }
-        next();
-      }
+        return next();
+      };
     }
-  }
+  };
 };
-
