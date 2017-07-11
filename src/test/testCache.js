@@ -32,6 +32,7 @@ const base = require('../index.js')({
     './test/config.json'
   ], fakeBase)
 });
+//base.config.set('revokedListActive', false);
 
 describe('Cache', () => {
   it('should create a cache', (done) => {
