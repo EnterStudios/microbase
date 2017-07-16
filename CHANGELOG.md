@@ -8,6 +8,10 @@ version numbers will follow a [Semver][]-ish `0.y.z` format, where `y`
 is incremented when new features or breaking changes are introduced,
 and `z` is incremented for lesser changes or bug fixes.
 
+## [1.0.0][] (2017-07-16)
+
+* Moved to Organization
+
 ## [0.12.0][] (2017-07-11)
 
 * Remove sloppy configuration.

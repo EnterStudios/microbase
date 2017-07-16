@@ -28,5 +28,6 @@
         "engine": "local"
       }
     }
-  }
+  },
+  "revokedListActive": false
 }

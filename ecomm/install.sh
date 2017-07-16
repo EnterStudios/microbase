@@ -23,12 +23,12 @@ updateRepo() {
     echo -e "⚡ Updating ${GREEN}$REPO${NC}"
     git pull
   else
-    echo -e "⚡ Cloning repository from git ${GREEN}ncornag/$REPO${NC}"
+    echo -e "⚡ Cloning repository from git ${GREEN}microbaseio/$REPO${NC}"
     if [ -z "$2" ]; then
-        git clone https://github.com/ncornag/$REPO.git
+        git clone https://github.com/microbaseio/$REPO.git
     else
         echo "Installing with depth $2"
-        git clone --depth $2 https://github.com/ncornag/$REPO.git
+        git clone --depth $2 https://github.com/microbaseio/$REPO.git
     fi
   fi
 }

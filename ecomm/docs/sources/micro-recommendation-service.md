@@ -13,16 +13,16 @@
 [downloads-image]:http://img.shields.io/npm/dm/microbase.svg
 [npm-image]:http://img.shields.io/npm/v/microbase.svg
 
-[travis-url]:https://travis-ci.org/ncornag/micro-recommendation-service
-[travis-image]:http://img.shields.io/travis/ncornag/micro-recommendation-service/develop.svg
-[coveralls-url]:https://coveralls.io/r/ncornag/micro-recommendation-service
-[coveralls-image]:https://img.shields.io/coveralls/ncornag/micro-recommendation-service/develop.svg
+[travis-url]:https://travis-ci.org/microbaseio/micro-recommendation-service
+[travis-image]:http://img.shields.io/travis/microbaseio/micro-recommendation-service/develop.svg
+[coveralls-url]:https://coveralls.io/r/microbaseio/micro-recommendation-service
+[coveralls-image]:https://img.shields.io/coveralls/microbaseio/micro-recommendation-service/develop.svg
 
-[bithound-url]:https://www.bithound.io/github/ncornag/micro-recommendation-service/develop
-[bithound-overal-image]:https://www.bithound.io/github/ncornag/micro-recommendation-service/badges/score.svg
-[bithound-image]:https://img.shields.io/bithound/dependencies/github/ncornag/micro-recommendation-service.svg
-[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/ncornag/micro-recommendation-service.svg
-[bithound-code-image]:https://www.bithound.io/github/ncornag/micro-recommendation-service/badges/code.svg
+[bithound-url]:https://www.bithound.io/github/microbaseio/micro-recommendation-service/develop
+[bithound-overal-image]:https://www.bithound.io/github/microbaseio/micro-recommendation-service/badges/score.svg
+[bithound-image]:https://img.shields.io/bithound/dependencies/github/microbaseio/micro-recommendation-service.svg
+[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/microbaseio/micro-recommendation-service.svg
+[bithound-code-image]:https://www.bithound.io/github/microbaseio/micro-recommendation-service/badges/code.svg
 
 Ecommerce Customer service, part of the [microbase](http://microbase.io) 
 ecosystem.

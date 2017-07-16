@@ -38,6 +38,7 @@ const base = require('../index.js')({
     './test/fake.json'
   ], fakeBase)
 });
+//base.config.set('revokedListActive', false);
 
 fakeBase.log.restore();
 

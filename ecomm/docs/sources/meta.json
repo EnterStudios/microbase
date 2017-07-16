@@ -4,7 +4,7 @@
     "level": 1
   },
   "*": {
-    "repoUrl": "https://github.com/ncornag/microbase/",
+    "repoUrl": "https://github.com/microbase/microbase/",
     "assetspath": "http://microbase.io/",
     "level": 0,
     "services": [

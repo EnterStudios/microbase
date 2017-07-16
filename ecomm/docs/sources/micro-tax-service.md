@@ -13,16 +13,16 @@
 [downloads-image]:http://img.shields.io/npm/dm/microbase.svg
 [npm-image]:http://img.shields.io/npm/v/microbase.svg
 
-[travis-url]:https://travis-ci.org/ncornag/micro-tax-service
-[travis-image]:http://img.shields.io/travis/ncornag/micro-tax-service/develop.svg
-[coveralls-url]:https://coveralls.io/r/ncornag/micro-tax-service
-[coveralls-image]:https://img.shields.io/coveralls/ncornag/micro-tax-service/develop.svg
+[travis-url]:https://travis-ci.org/microbaseio/micro-tax-service
+[travis-image]:http://img.shields.io/travis/microbaseio/micro-tax-service/develop.svg
+[coveralls-url]:https://coveralls.io/r/microbaseio/micro-tax-service
+[coveralls-image]:https://img.shields.io/coveralls/microbaseio/micro-tax-service/develop.svg
 
-[bithound-url]:https://www.bithound.io/github/ncornag/micro-tax-service/develop
-[bithound-overal-image]:https://www.bithound.io/github/ncornag/micro-tax-service/badges/score.svg
-[bithound-image]:https://img.shields.io/bithound/dependencies/github/ncornag/micro-tax-service.svg
-[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/ncornag/micro-tax-service.svg
-[bithound-code-image]:https://www.bithound.io/github/ncornag/micro-tax-service/badges/code.svg
+[bithound-url]:https://www.bithound.io/github/microbaseio/micro-tax-service/develop
+[bithound-overal-image]:https://www.bithound.io/github/microbaseio/micro-tax-service/badges/score.svg
+[bithound-image]:https://img.shields.io/bithound/dependencies/github/microbaseio/micro-tax-service.svg
+[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/microbaseio/micro-tax-service.svg
+[bithound-code-image]:https://www.bithound.io/github/microbaseio/micro-tax-service/badges/code.svg
 
 Ecommerce Taxes service, part of the [microbase](http://microbase.io)
 ecosystem.

@@ -1,6 +1,6 @@
 {
   "name": "microbase",
-  "version": "0.12.0",
+  "version": "1.0.0",
   "description": "Ecommerce platform to develop store backends.",
   "main": "index.js",
   "homepage": "http://microbase.io",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ncornag/microbase.git"
+    "url": "https://github.com/microbaseio/microbase.git"
   },
   "author": "Nicolás Cornaglia Schlieman (https://github.com/ncornag)",
   "license": "OSL-3.0",

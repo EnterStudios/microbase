@@ -32,6 +32,7 @@ const base = require('../index.js')({
     './test/config.json'
   ], fakeBase)
 });
+//base.config.set('revokedListActive', false);
 
 describe('Utils', () => {
   it('should extract schema validation errors', (done) => {

@@ -11,7 +11,7 @@ services:
     command: agent -server -bootstrap-expect 1 -client 0.0.0.0 -ui
 
   gateway:
-    image: ncornag/micro-docker-nginx
+    image: microbaseio/micro-docker-nginx
     restart: always
     mem_limit: 128m
     links:
