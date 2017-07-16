@@ -13,16 +13,16 @@
 [downloads-image]:http://img.shields.io/npm/dm/microbase.svg
 [npm-image]:http://img.shields.io/npm/v/microbase.svg
 
-[travis-url]:https://travis-ci.org/ncornag/micro-payment-service
-[travis-image]:http://img.shields.io/travis/ncornag/micro-payment-service/develop.svg
-[coveralls-url]:https://coveralls.io/r/ncornag/micro-payment-service
-[coveralls-image]:https://img.shields.io/coveralls/ncornag/micro-payment-service/develop.svg
+[travis-url]:https://travis-ci.org/microbaseio/micro-payment-service
+[travis-image]:http://img.shields.io/travis/microbaseio/micro-payment-service/develop.svg
+[coveralls-url]:https://coveralls.io/r/microbaseio/micro-payment-service
+[coveralls-image]:https://img.shields.io/coveralls/microbaseio/micro-payment-service/develop.svg
 
-[bithound-url]:https://www.bithound.io/github/ncornag/micro-payment-service/develop
-[bithound-overal-image]:https://www.bithound.io/github/ncornag/micro-payment-service/badges/score.svg
-[bithound-image]:https://img.shields.io/bithound/dependencies/github/ncornag/micro-payment-service.svg
-[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/ncornag/micro-payment-service.svg
-[bithound-code-image]:https://www.bithound.io/github/ncornag/micro-payment-service/badges/code.svg
+[bithound-url]:https://www.bithound.io/github/microbaseio/micro-payment-service/develop
+[bithound-overal-image]:https://www.bithound.io/github/microbaseio/micro-payment-service/badges/score.svg
+[bithound-image]:https://img.shields.io/bithound/dependencies/github/microbaseio/micro-payment-service.svg
+[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/microbaseio/micro-payment-service.svg
+[bithound-code-image]:https://www.bithound.io/github/microbaseio/micro-payment-service/badges/code.svg
 
 Ecommerce Payments service, part of the [microbase](http://microbase.io) 
 ecosystem.

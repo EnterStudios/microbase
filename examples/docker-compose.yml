@@ -3,7 +3,7 @@ version: '2'
 services:
 
   consul:
-    image: ncornag/micro-docker-lb
+    image: microbaseio/micro-docker-lb
     ports:
     - 80:80
     - 8500:8500

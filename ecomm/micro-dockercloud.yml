@@ -23,14 +23,14 @@ gateway:
   autoredeploy: true
   environment:
     - UPSTREAMUSEIP=true
-  image: 'ncornag/micro-docker-nginx:latest'
+  image: 'microbaseio/micro-docker-nginx:latest'
   mem_limit: 64m
   ports:
     - '80:80'
   restart: always
 cart-service:
   autoredeploy: true
-  image: 'ncornag/micro-cart-service:latest'
+  image: 'microbaseio/micro-cart-service:latest'
   links:
     - bus
     - gateway
@@ -39,7 +39,7 @@ cart-service:
   restart: always
 catalog-service:
   autoredeploy: true
-  image: 'ncornag/micro-catalog-service:latest'
+  image: 'microbaseio/micro-catalog-service:latest'
   links:
     - bus
     - gateway
@@ -48,7 +48,7 @@ catalog-service:
   restart: always
 promotion-service:
   autoredeploy: true
-  image: 'ncornag/micro-promotion-service:latest'
+  image: 'microbaseio/micro-promotion-service:latest'
   links:
     - bus
     - gateway
@@ -57,7 +57,7 @@ promotion-service:
   restart: always
 recommendation-service:
   autoredeploy: true
-  image: 'ncornag/micro-recommendation-service:latest'
+  image: 'microbaseio/micro-recommendation-service:latest'
   links:
     - bus
     - gateway
@@ -66,7 +66,7 @@ recommendation-service:
   restart: always
 stock-service:
   autoredeploy: true
-  image: 'ncornag/micro-stock-service:latest'
+  image: 'microbaseio/micro-stock-service:latest'
   links:
     - bus
     - gateway
@@ -75,7 +75,7 @@ stock-service:
   restart: always
 tax-service:
   autoredeploy: true
-  image: 'ncornag/micro-tax-service:latest'
+  image: 'microbaseio/micro-tax-service:latest'
   links:
     - bus
     - gateway

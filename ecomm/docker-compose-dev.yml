@@ -11,7 +11,7 @@ oauth-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-oauth-service:develop'
+  image: 'microbaseio/micro-oauth-service:develop'
   links:
     - bus
     - datadog
@@ -28,7 +28,7 @@ cart-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-cart-service:develop'
+  image: 'microbaseio/micro-cart-service:develop'
   links:
     - bus
     - datadog
@@ -45,7 +45,7 @@ catalog-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-catalog-service:develop'
+  image: 'microbaseio/micro-catalog-service:develop'
   links:
     - bus
     - datadog
@@ -72,7 +72,7 @@ customer-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-customer-service:develop'
+  image: 'microbaseio/micro-customer-service:develop'
   links:
     - bus
     - datadog
@@ -98,7 +98,7 @@ gateway:
   autoredeploy: true
   environment:
     - UPSTREAMUSEIP=true
-  image: 'ncornag/micro-docker-nginx:latest'
+  image: 'microbaseio/micro-docker-nginx:latest'
   mem_limit: 64m
   ports:
     - '80:80'
@@ -127,7 +127,7 @@ promotion-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-promotion-service:develop'
+  image: 'microbaseio/micro-promotion-service:develop'
   links:
     - bus
     - datadog
@@ -144,7 +144,7 @@ recommendation-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-recommendation-service:develop'
+  image: 'microbaseio/micro-recommendation-service:develop'
   links:
     - bus
     - datadog
@@ -161,7 +161,7 @@ stock-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-stock-service:develop'
+  image: 'microbaseio/micro-stock-service:develop'
   links:
     - bus
     - datadog
@@ -178,7 +178,7 @@ tax-service:
     - transports_http_monitors_sentry_enabledBeforeErrorHandlers=true
     - transports_http_monitors_sentry_enabledBeforeRoutes=true
     - 'transports_http_monitors_sentry_url=https://user:pass@sentry.io/port'
-  image: 'ncornag/micro-tax-service:develop'
+  image: 'microbaseio/micro-tax-service:develop'
   links:
     - bus
     - datadog

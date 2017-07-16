@@ -13,16 +13,16 @@
 [downloads-image]:http://img.shields.io/npm/dm/microbase.svg
 [npm-image]:http://img.shields.io/npm/v/microbase.svg
 
-[travis-url]:https://travis-ci.org/ncornag/microbase
-[travis-image]:http://img.shields.io/travis/ncornag/microbase/develop.svg
-[coveralls-url]:https://coveralls.io/r/ncornag/microbase
-[coveralls-image]:https://img.shields.io/coveralls/ncornag/microbase/develop.svg
+[travis-url]:https://travis-ci.org/microbaseio/microbase
+[travis-image]:http://img.shields.io/travis/microbaseio/microbase/develop.svg
+[coveralls-url]:https://coveralls.io/r/microbaseio/microbase
+[coveralls-image]:https://img.shields.io/coveralls/microbaseio/microbase/develop.svg
 
-[bithound-url]:https://www.bithound.io/github/ncornag/microbase/develop
-[bithound-overal-image]:https://www.bithound.io/github/ncornag/microbase/badges/score.svg
-[bithound-image]:https://img.shields.io/bithound/dependencies/github/ncornag/microbase.svg
-[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/ncornag/microbase.svg
-[bithound-code-image]:https://www.bithound.io/github/ncornag/microbase/badges/code.svg
+[bithound-url]:https://www.bithound.io/github/microbaseio/microbase/develop
+[bithound-overal-image]:https://www.bithound.io/github/microbaseio/microbase/badges/score.svg
+[bithound-image]:https://img.shields.io/bithound/dependencies/github/microbaseio/microbase.svg
+[bithound-dev-image]:https://img.shields.io/bithound/devDependencies/github/microbaseio/microbase.svg
+[bithound-code-image]:https://www.bithound.io/github/microbaseio/microbase/badges/code.svg
 
 MicroBase is an ecommerce platform ecosystem that allows the development 
 of the ecommerce store backends. The architecture embraces the 
@@ -46,7 +46,7 @@ Example add to Cart call
 An updated version of the Services code are linked as submodules to this 
 project. For the most up to date ones refer to the original repositories:
 
-[Catalog Service](https://github.com/ncornag/micro-catalog-service)
+[Catalog Service](https://github.com/microbaseio/micro-catalog-service)
 
 * Hierarchical Categories
 * Category Classifications
@@ -55,7 +55,7 @@ project. For the most up to date ones refer to the original repositories:
 * Taxes per product
 * Stock status per product
 
-[Cart Service](https://github.com/ncornag/micro-cart-service)
+[Cart Service](https://github.com/microbaseio/micro-cart-service)
 
 * Single or bulk add to Cart
 * Stock checking available per product
@@ -65,22 +65,22 @@ project. For the most up to date ones refer to the original repositories:
 * Fast Cart calculation
 * Abandonment handling
 
-[Customer Service](https://github.com/ncornag/micro-customer-service)
+[Customer Service](https://github.com/microbaseio/micro-customer-service)
 
 * Customers and addresses management (create, read, update and delete operations).
 * Check customers credentials.
 
-[Stock Service](https://github.com/ncornag/micro-stock-service)
+[Stock Service](https://github.com/microbaseio/micro-stock-service)
 
 * Warehose enabled
 * Reservation system available with expiration times
 
-[Tax Service](https://github.com/ncornag/micro-tax-service)
+[Tax Service](https://github.com/microbaseio/micro-tax-service)
 
 * Net and gross calculations
 * Easily creation of custom taxes, based on Cart, Products and User data
 
-[Promotion Service](https://github.com/ncornag/micro-promotion-service)
+[Promotion Service](https://github.com/microbaseio/micro-promotion-service)
 
 * Multiple promotions firing per cart
 * Per Product, Product Category, Order or User data firing
@@ -88,16 +88,16 @@ project. For the most up to date ones refer to the original repositories:
 * Almost fullfilled promotion detection with optional thresholds
 * Easily creation of custom firing conditions
 
-[Payment Service](https://github.com/ncornag/micro-payment-service)
+[Payment Service](https://github.com/microbaseio/micro-payment-service)
 
 * Default implementations for some providers
 * Easy implement your own gateway
 
-[Recommendation Service](https://github.com/ncornag/micro-recommendation-service)
+[Recommendation Service](https://github.com/microbaseio/micro-recommendation-service)
 
 * gathers and process 'Also viewd' products
 
-[Oauth Service](https://github.com/ncornag/micro-oauth-service)
+[Oauth Service](https://github.com/microbaseio/micro-oauth-service)
 
 * API tokens
 * User tokens
@@ -116,7 +116,7 @@ and run node.
 ```bash
 mkdir /tmp/micro-repos
 cd /tmp/micro-repos
-git clone https://github.com/ncornag/micro-catalog-service.git
+git clone https://github.com/microbaseio/micro-catalog-service.git
 cd micro-catalog-service/src
 node index.js
 ```
@@ -139,7 +139,7 @@ There is a docker compose file provided to run the ecomm services and the additi
  images and start the containers.
 
 ```bash
-git clone https://github.com/ncornag/microbase.git
+git clone https://github.com/microbaseio/microbase.git
 cd microbase/ecomm
 ./run.sh /tmp/micro
 ```
@@ -218,9 +218,9 @@ microservices style architecture.
 
 ## Examples:
 
-[micro-math-service](https://github.com/ncornag/microbase/tree/develop/examples/micro-math-service)
+[micro-math-service](https://github.com/microbaseio/microbase/tree/develop/examples/micro-math-service)
 
-[micro-taxes-service](https://github.com/ncornag/microbase/tree/develop/examples/micro-taxes-service)
+[micro-taxes-service](https://github.com/microbaseio/microbase/tree/develop/examples/micro-taxes-service)
 
 ### Run the examples:
 ```bash

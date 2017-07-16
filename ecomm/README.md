@@ -6,7 +6,7 @@ First clone this repo:
 export MICROBASE_HOME=~/micro
 mkdir $MICROBASE_HOME
 cd $MICROBASE_HOME
-git clone https://github.com/ncornag/microbase.git
+git clone https://github.com/microbaseio/microbase.git
 cd $MICROBASE_HOME/microbase
 ```
 
