@@ -1,6 +1,6 @@
 {
   "name": "microbase",
-  "version": "0.12.0",
+  "version": "1.0.0",
   "description": "Ecommerce platform to develop store backends.",
   "main": "index.js",
   "homepage": "http://microbase.io",
